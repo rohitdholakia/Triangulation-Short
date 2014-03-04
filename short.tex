@@ -50,25 +50,17 @@ This paper conducts the first in-depth study on the use of triangulation for fou
 \section{Introduction}
 Triangulation for phrase-based statistical machine translation~\cite{Utiyama:07,Cohn:07} refers to the use of a pivot language when translating from a source language with insuffient resources to a target language. Previous research into triangulation for machine translation has assumed the existence of large corpora in the same domain as the low resource language data. However, real-world low resource languages are quite different when it comes to the kind and size of parallel data that is available. This paper considers machine translation into English from four diverse low-resource languages: Mawukakan and Maninkakan, which are West African languages;  Haitian Kreyol, using real-world short messages sent in the aftermath of the Haiti earthquake in 2010; and Malagasy, an Austronesian language that is the national language of Madagascar. This is the first in-depth study of triangulation for Haitian Kreyol; and there is no previously published work on statistical machine translation on the other three languages we study in this paper: Mawukakan, Maninkakan and Malagasy.
 
-Faced with a low-resource language pair, several questions arise when combining a direct translation model with a triangulation model: 
+Faced with a low-resource language pair, several questions arise when using triangulation: 
 \begin{itemize}\addtolength{\itemsep}{-0.4\baselineskip}
 	\item How large should the triangulated table be? 
 	\item What is the best way to compute feature values in the triangulated phrase table? 
-	\item When combining with the direct system, do we use linear interpolation or alternative decoding paths? 
+	\item When combining with the direct system, do we use uniform linear interpolation or alternative decoding paths? 
 	\item How does one penalize triangulated phrase pairs with insufficient alignment between the words in the phrase pairs? 
 \end{itemize}
 
-All the papers that use triangulation in machine translation cite either~\cite{Utiyama:07} or~\cite{Cohn:07}, both published in 2007 (and sometimes cite both of them but use either one model or the other). Subsequent work~\cite{Nakov:12,Nakovemnlp:12,Gispert:06,Huck:12} has also assumed that parallel data in pivot languages can be found in the same domain as the original resource-poor language pair. While~\cite{Utiyama:07} used multi-parallel europarl comprising 560,000 sentences,~\cite{Cohn:07} used 700,000 multi-parallel Europarl sentences and a low-resource scenario was ``simulated'' by using the top10K sentences for each language.~\cite{Nakov:12} propose a language-independent approach to improving translation for low-resource languages, but the approach assumes the presence of a resource-rich language that bears similarity to the low-resource language, the similarities helping in creating a large triangulated phrase table. In~\cite{Nakovemnlp:12}, the resource-rich language is adapted to be more like the resource-poor one. Notice that this also assumes both are very similar. Results are reported using both Malay-Indonesian and Bulgarian-Macedonian, the third language being English in both cases.~\cite{Gispert:06} translate Catalan to Spanish via English by using news corpora on both source pivot and pivot target side.~\cite{Huck:12} report on BLEU score improvements by using $10^9$ parallel sentence between German and French. This kind of domain similarity is not easy to find for realistic low-resource settings. Data settings for~\cite{Utiyama:07} and ~\cite{Cohn:07} are shown in Table~\ref{table:datasettings_differences}.
-
-\subsection{Four Very Low-Resource Languages}
-	Except Haitian Kreyol, none of the other languages we use triangulation for have been studied in the literature before. We chose Haitian Kreyol and Malagasy because the datasets are comprise real-world data (short messages sent after earthquake for Haitian Kreyol; automatically aligned news articles in Malagasy). Moreover, we use the Bible as our source pivot bitext for both as they have no parallel data source with French. This leads to a very disjoint set of systems, a contrast to Multi-parallel Europarl proceedings. Mawukakan and Mawukakan have a very tiny source pivot and source target bitext ($<$6K sentences each), but the source pivot corpus has common sentences with the source target corpus. The sizes are mentioned in Table~\ref{table:datasettings_differences}. 
 
 
-\begin{comment}
-In this paper, we consider and answer the questions raised above for real-world low-resource language pairs, building an effective machine translation for three of these languages for the first time. Furthermore, in all four languages since the low-resource language pair and pivot language pair data typically come from very different domains, we use insights from domain adaptation to fine-tune the weighted mixture of direct and pivot based phrase pairs to significantly improve translation quality. 
-\end{comment}
-
-\begin{table*}
+\begin{table*}[!ht]
 	\footnotesize
 	\small
 	\centering
@@ -76,6 +68,14 @@ In this paper, we consider and answer the questions raised above for real-world 
 	\caption{Comparison of various data settings.}
 	\label{table:datasettings_differences}
 \end{table*}
+
+All the papers that use triangulation cite either~\cite{Utiyama:07} or~\cite{Cohn:07}, both published in 2007 (and sometimes cite both of them but use either one model or the other). Subsequent work~\cite{Nakov:12,Nakovemnlp:12,Gispert:06,Huck:12} has also assumed that parallel data in pivot languages can be found in the same domain as the original resource-poor language pair. While~\cite{Utiyama:07} use multi-parallel europarl comprising 560,000 sentences,~\cite{Cohn:07} use 700,000 multi-parallel Europarl sentences and a low-resource scenario is ``simulated'' by using the top10K sentences for each language.~\cite{Nakov:12} propose a language-independent approach to improving translation for low-resource languages, but the approach assumes the presence of a resource-rich language that bears similarity to the low-resource language, the similarities helping in creating a large triangulated phrase table. In~\cite{Nakovemnlp:12}, the resource-rich language is adapted to be more like the resource-poor one. Notice that this also assumes both are very similar. Results are reported using both Malay-Indonesian and Bulgarian-Macedonian, the third language being English in both cases.~\cite{Gispert:06} translate Catalan to Spanish via English by using news corpora on both source pivot and pivot target side.~\cite{Huck:12} report on BLEU score improvements by using $10^9$ parallel sentence between German and French. This kind of domain similarity is not easy to find for realistic low-resource settings. Data settings for~\cite{Utiyama:07} and ~\cite{Cohn:07} are shown in Table~\ref{table:datasettings_differences}.
+
+\subsection{Four Very Low-Resource Languages}
+	Except Haitian Kreyol, none of the other languages we use triangulation for have been studied in the literature before. We chose Haitian Kreyol and Malagasy because the datasets represent real-world data (short messages sent after earthquake for Haitian Kreyol; automatically aligned news articles in Malagasy). Moreover, we use the Bible as our source pivot bitext for both as they have no parallel data source with French. This leads to a very disjoint set of systems, a contrast to Multi-parallel Europarl proceedings. Mawukakan and Mawukakan have a very tiny source pivot and source target bitext ($<$6K sentences each), but the source pivot corpus has common sentences with the source target corpus. The corpus sizes are mentioned in Table~\ref{table:datasettings_differences}. 
+
+
+
 
 
 \begin{comment}
@@ -125,6 +125,7 @@ In this paper, we consider and answer the questions raised above for real-world 
 
 \section{Models}
 \label{sec:models}
+	In this section, we discuss two methods for computing phrase scores and two methods for computing lexical scores. We also propose a new iterative method to combine the direct and triangulated systems by using grid search over model weights. To penalize phrase pairs with little alignment between them, we also discuss a method from~\cite{Ahmed:13}.  
 \begin{comment}
 \subsection{Fan-out Limit}
 \label{sec:topn}
@@ -147,12 +148,75 @@ In this paper, we consider and answer the questions raised above for real-world 
 		\label{table:allrules}
 	\end{table}
 \end{comment}
+\subsection{Phrase Scores}
+\subsubsection{Product Approach}
+	
+	An often cited approach to compute feature values is from~\cite{Utiyama:07}, where we multiply the values on the source pivot and pivot target phrase tables, as shown in equations~\eqref{eq:forward} and~\eqref{eq:backward}. 
+
+
+	\begin{equation} \label{eq:forward}
+        p_w(t \mid s) = \sum_{p} p_w(t \mid p) p_w(p \mid s)
+	\end{equation}
+
+	\begin{equation} \label{eq:backward}
+        p_w(s \mid t) = \sum_{p} p_w(s \mid p) p_w(p \mid t)
+	\end{equation}
+
+	We are marginalizing over the pivot phrases (p), essentially making an independence assumption of the following form, as in~\cite{Cohn:07}:  
+
+	\begin{eqnarray*}
+		p(t \mid s)&=&\sum_{p}{p(t, p \mid s)}\\
+		&=& \sum_{p}{p(t \mid p, s)\,p(p \mid s)}\\
+		&\approx& \sum_{p}{p(t \mid p)\,p(p \mid s)}
+	\end{eqnarray*}
+
+\subsubsection{Joint and Conditional distributions in triangulation}
+\label{sec:joint}
+	Another way of calculating the triangulated phrase scores $p_{w}(t \mid s)$ and $p_{w}(s \mid t)$ would be to take the joint probability $p_{w}(s, t)$ and decompose it to get the conditional distributions. But, we do not have the counts in the triangulated phrase table. The pairs that end up in the triangulated table are contingent on the common pivot phrases that connected the source target pair, thus, counting the pairs after triangulation will not be a true reflection of the joint probability. For a triangulated table between \emph{s} and \emph{t}, using source pivot phrase table \emph{sp} and pivot target phrase table \emph{pt}, we can compute the joint probability of a phrase pair (s, t) as follows: 
+
+	\begin{eqnarray*}
+		p_{tr}(s, t) &=& \sum_{i}p_{sp}(s, i) p_{pt}(i, t) \\
+				&=& \sum_{i}p_{sp}(s \mid i) p_{sp}(i) p_{pt}(i \mid t) p_{pt}(t)
+	\end{eqnarray*} 
+	
+
+	This is a more accurate description of the joint probability of the (s, t) phrase pair in the triangulated table because we are using source pivot and pivot target counts, both of which have been extracted from the alignments. As we have the counts for the direct system, computing the joint and the conditional distributions is relatively straight-forward. 
+
+\subsection{Lexical Scores}
+
+\subsection{Product Approach}
+	Similar to phrase scores, we compute the triangulated lexical scores using the product of the lexical scores of the source pivot and pivot target tables.   
+
+	\begin{equation}
+        p_{lex}(t \mid s) = \sum_{p} p_{lex}(t \mid p) p_{lex}(p \mid s)
+	\end{equation}
+
+	\begin{equation}
+        p_{lex}(s \mid t) = \sum_{p} p_{lex}(s \mid p) p_{lex}(p \mid t)
+	\end{equation}
+
+\subsection{IBM Model1 Alignments}
+\label{sec:model1}
+
+	An alternative way to compute the lexical score is to use a IBM Model 1~\cite{Brown:1993} (Model 1, henceforth) score between the phrase pairs in the triangulated table. Treating the triangulated phrase table as a parallel corpus, we learn the Model 1 alignment scores in both directions using 5 iterations of the EM algorithm~\cite{Dempster:77}. Given a foreign sentence f = f$_{1}$, . . . ., f$_{m}$, english sentence e = e$_{1}$, . . . , e$_{l}$, the Model 1 score between the sentences is calculated as follows: 
+
+		\begin{equation}
+			p(f, a \mid e) = \frac{\epsilon}{(l+1)^m}\mathlarger{\prod\limits_{j=1}^{m}t(f_{j}|e_{a(j)})}
+		\end{equation}
+
+	Why use the Model 1 score? Model 1 learns the likelihood of the alignment of the individual words, while also considering the fact that a triangulated table will have less number of source phrases translating into good and some noisy translations. Noisy translations will automatically get a lower Model 1 score, something less likely to happen when using the simpler approach of multiplying the lexical scores. This effect of noisy translations ending up as a viable translation during decoding is also because of the limited source pivot training corpora available. Several translations have been only seen once and the phrase lengths are not very long either (90\% of Mawukakan and Maninkakan phrase table has less than or equal to 3 words).
+
+	\begin{comment}
+	The connectivity features in section~\ref{sec:strength} assign a phrase-level score to a given translation pair. The score does not reflect the actual alignments between the word pairs.  A Model 1 score is also used in~\cite{Cohn:07} in the absence of word alignments. They report a BLEU score improvement of 2 points over the standard feature set when using the Model 1 score, but we observe a different pattern altogether across all the four resource-poor languages~\ref{sec:results}. 
+	\end{comment}
+
+
 
 \subsection{Connectivity Features}
 \label{sec:strength}
 
 	
-	The phrase pairs in the triangulated phrase table are contingent upon the common pivot phrases. As a result, we can have phrase pairs that map ``!'' to a target phrase ``and making the soup thick !'' in Haitian Kreyol to English triangulated phrase table. Computing feature values using equations from section~\ref{sec:topn}, it is reasonable to assume that spurious phrase pairs like above can get a high enough feature value to end up as a translation during decoding. To reward phrase pairs that have more alignment links between and to penalize pairs that don't, we add two connectivity features to the phrase table, as used in ~\cite{Ahmed:13}. 
+	The phrase pairs in the triangulated phrase table are contingent upon the common pivot phrases. As a result, we can have phrase pairs that map \textbf{``!''} to a target phrase \textbf{``and making the soup thick !''} in Haitian Kreyol to English triangulated phrase table. Owing to the fan-out nature of triangulation, spurious phrase pairs like above get high enough feature values to end up as a translation during decoding. To reward phrase pairs that have more alignment links between and to penalize pairs that don't, we add two connectivity features to the phrase table, as used in ~\cite{Ahmed:13}. 
 
 	For a source phrase \emph{p$_s$}, target phrase \emph{p$_t$}, and with the number of alignment links between them \emph{N}, the strength will be calculated as follows :
 
@@ -166,69 +230,27 @@ In this paper, we consider and answer the questions raised above for real-world 
 
 	where S is the length of the source phrase \emph{p$_s$} and T is the length of the target phrase \emph{p$_t$}. To compute the connectivity strength feature, the alignments in the source pivot phrase pair are intersected with the pivot target phrase pair. If the resulting alignment has a higher strength, it implies that a majority of the source words do have an alignment with the target. 
 
-\subsection{Lexical Scores}
-
-
-\subsection{IBM Model1 Alignments}
-\label{sec:model1}
-	In section~\ref{sec:topn}, we computed the lexical scores by multiplying the component scores and marginalizing over the pivot phrase. The component lexical scores are a measure of the word-to-word alignment~\cite{Koehn:03} and by multiplying them, the final lexical scores are implying some strength-of-tie for each pair in the source target translation. But, as was discussed in~\ref{sec:topn}, using triangulation adds some noise to the translation model by proposing spurious translations. 
-
-	An alternative way to compute the lexical score is to use a Model 1~\cite{Brown:1993} score between the phrase pairs in the triangulated table. Treating the triangulated phrase table as a parallel corpus, we learn the model 1 alignment scores in both directions using 5 iterations of the EM algorithm~\cite{Dempster:77}. Given a foreign sentence f = f$_{1}$, . . . ., f$_{m}$, english sentence e = e$_{1}$, . . . , e$_{l}$, the model 1 score between the sentences is calculated as follows: 
-
-		\begin{equation}
-			p(f, a \mid e) = \frac{\epsilon}{(l+1)^m}\mathlarger{\prod\limits_{j=1}^{m}t(f_{j}|e_{a(j)})}
-		\end{equation}
-
-	The strength features in section~\ref{sec:strength} assign a phrase-level score to a given translation pair. The score does not reflect the actual many-to-one alignments between the phrases. A Model 1 score learns the likelihood of the alignment of the individual words, while also considering the fact that a triangulated table will have less number of source phrases translating into good and some noisy translations. Noisy translations will automatically get a lower Model 1 score, something less likely to happen when using the simpler approach of multiplying the lexical scores. This effect of noisy translations ending up as a viable translation during decoding is also because of the limited source pivot training corpora available. Several translations have been only seen once and the phrase lengths are not very long either ( 90\% of Mawukakan and Maninkakan phrase table has less than or equal to 3 words). A modified model 1 score is also used in~\cite{Cohn:07} in the absence of word alignments. They report a BLEU score improvement of 2 points over the standard feature set when using the Model 1 score, but we observe a different pattern altogether across all the four resource-poor languages~\ref{sec:results}. 
 
 
 
-
-\subsection{Phrase Scores}
-\subsubsection{Product Approach}
-	Like in ~\cite{Utiyama:07}, we use the following equations to calculate the phrase scores in the triangulated translation model. 
-	
-	\begin{equation*}
-        p_w(t \mid s) = \sum_{i} p_w(t \mid i) p_w(i \mid s)
-	\end{equation*}
-
-	\begin{equation*}
-        p_w(s \mid t) = \sum_{i} p_w(s \mid i) p_w(i \mid t)
-	\end{equation*}
-
-	We are marginalizing over the pivot phrases, essentially making an independence assumption of the following form, as in~\cite{Cohn:07} :  
-
-	\begin{eqnarray*}
-		p(t \mid s)&=&\sum_{i}{p(t, i \mid s)}\\
-		&=& \sum_{i}{p(t \mid i, s)\,p(i \mid s)}\\
-		&\approx& \sum_{i}{p(t \mid i)\,p(i \mid s)}
-	\end{eqnarray*}
-
-\subsubsection{Joint and Conditional distributions in triangulation}
-\label{sec:joint}
-	Another way of calculating the triangulated phrase scores $p_{tr}(e \mid f)$ and $p_{tr}(f \mid e)$ would be to take the joint probability $p_{tr}(s, t)$ and decompose it to get the conditional distributions. But, we do not have the counts in the triangulated phrase table. The pairs that end up in the triangulated table are contingent on the common pivot phrases that connected the source target pair, thus, counting the pairs after triangulation will not be a true reflection of the joint probability. For a triangulated table between \emph{src} and \emph{tgt}, using source pivot table \emph{sp} and pivot target table \emph{pt}, we can compute the joint probability of a phrase pair (s, t) as follows: 
-
-	\begin{eqnarray*}
-		p_{tr}(s, t) &=& \sum_{i}p_{sp}(s, i) p_{pt}(i, t) \\
-				&=& \sum_{i}p_{sp}(s \mid i) p_{sp}(i) p_{pt}(i \mid t) p_{pt}(t)
-	\end{eqnarray*} 
-	
-
-	This is a more accurate description of the joint probability of the (s, t) phrase pair in the triangulated table because we are using source pivot and pivot target counts, both of which have been extracted from the alignments. As we have the counts for the direct system, computing the joint and the conditional distributions is relatively straight-forward. When interpolating the triangulated and direct translation models~\eqref{eq:interpolation}, the three new features are added to the log-linear pipeline. Owing to the smaller size of the source pivot corpora, we observed it was better to add the three new features to the log-linear pipeline and let MERT decide which features lead to a better BLEU score. This is in contrast to~\cite{Cohn:07} where they combine the joint probability of the phrase pair from direct and triangulated uniformly, and use the resulting conditionals as part of the log-linear pipeline.  
 	
 
 \section{Translation Model Combination}
 \label{sec:interpolation}
-	When combining two or more translation models, one needs relevant weights assigned to the features from the various models with the aim of maximizing the BLEU score on a heldout set. When the models are from different domains, we want to find the best parameters such that the best translation wins for each given source phrase. For instance, consider the word ``tranblemannt\`e''. It gets translated to \emph{shaking} by our best baseline system. After interpolating our top-20 triangulated translation model, it gets translated to earthquake. Note that the word earthquake is present in the baseline translation model but does not end up as a translation for the source word ``tranblemannt\`e". 
-
-	In our experiments, we have a direct translation model and a triangulated translation model from source to target. To learn the best weight $\lambda_{d}$ for the direct system, we perform grid search over the possible co-efficients to find the best $\lambda_{d}$. 
-
+	For Haitian Kreyol, we are trying to improve translations for real world short messages using common phrases between Bible and parlimentary proceedings. For Malagasy, we are trying to do the same for news articles. To get the best of both worlds, we would want a $\lambda_{d}$ in equation~\eqref{eq:interpolation} which maximizes our BLEU score, where $p_{d}$ represents the direct translation model while $p_{t}$ represents the triangulated translation model. The question that arises is if we can learn $\lambda_{d}$ or use uniform weights~\cite{Cohn:07} or try various heuristic values and choose the best one~\cite{Nakov:12}. 
 
 	\begin{equation} \label{eq:interpolation}
 		p_{interp}(s \mid t) = \lambda_{d} p_{d}(s \mid t) + (1 - \lambda_{d}) p_{t}(s \mid t)
 	\end{equation}
 
-	Given a source target phrase pair (s, t), we use uniform linear interpolation as shown in~\eqref{eq:interpolation} to scale all the feature values. In our experiments, we found that epsilon smoothing when the phrase pair is found in only one distribution had no effect. For all the results mentioned, no smoothing is performed. 
+
+
+	\begin{comment}
+	When combining two or more translation models, one needs relevant weights assigned to the features from the various models with the aim of maximizing the BLEU score on a heldout set. When the models are from different domains, we want to find the best parameters such that the best translation wins for each given source phrase. For instance, consider the word ``tranblemannt\`e''. It gets translated to \emph{shaking} by our best baseline system. After interpolating our top-20 triangulated translation model, it gets translated to earthquake. Note that the word earthquake is present in the baseline translation model but does not end up as a translation for the source word ``tranblemannt\`e". 
+	
+
+	\end{comment}
+
 	
 
 	\begin{algorithm}
@@ -241,25 +263,9 @@ In this paper, we consider and answer the questions raised above for real-world 
 		\textbf{Output:} best$_{\lambda_{d}}$
 
 
-		\begin{algorithmic}[l]
+		\begin{algorithmic}[1]
 			\WHILE{$\delta_{bleu}$ $>$ minimum} \label{aline:condition}
 			\STATE{interpolate p$_{d}$, p$_{t}$ to give p$_{interp}$} \label{aline:inter}
-			%\STATE{p$_{interp}$  = $\lambda_{d}$$p_{d}$ + $\lambda_{t}$$p_{t}$}
-			\begin{comment}
-			\FOR{src-tgt in p$_{d}$} 
-			\IF{src-tgt in p$_{t}$}
-					
-					\STATE{p$_{interp}$ =$\sum\limits_f$ $\lambda_{d}$$p_{d}$\emph{f} + $\lambda_{t}$$p_{t}$\emph{f}}
-			\ENDIF
-			\IF{src-tgt not in p$_{t}$} 
-				\STATE{p$_{interp}$ = $\sum\limits_f$ $\lambda_{d}$$p_{d}$\emph{f}}
-				%\STATE{p$_{interp}$ = $\lambda_{d}$$p_{d}$}
-			\ENDIF
-			\ENDFOR
-			\FOR{src-tgt in p$_{t}$ and not in p$_{d}$}
-				\STATE{p$_{interp}$ = $\sum\limits_f$ $\lambda_{t}$$p_{t}$\emph{f}}
-			\ENDFOR
-			\end{comment}
 			\STATE{Run MERT using p$_{interp}$ as translation model} 
 			\STATE{find bleu$_{heldout}$} 
 			\STATE{$\delta_{bleu}$ = bleu$_{heldout}$ - prev$_{bleu}$}
@@ -269,7 +275,26 @@ In this paper, we consider and answer the questions raised above for real-world 
 		\end{algorithmic}
 	\end{algorithm}
 
-	Algorithm~\ref{algo:condor} explains the process of using CONDOR~\cite{condor-practice} to find the best interpolation co-efficient for a given direct and triangulated model. Note that the approach can be easily extended to multiple triangulated models. Line~\ref{aline:inter} interpolates the two translation models using equation~\eqref{eq:interpolation}. We re-tune the log-linear weights using MERT for the interpolated feature values and use the tuned model to find BLEU score on the heldout set. Based on the difference between the BLEU score obtained and the previous BLEU(line~\ref{aline:search}), CONDOR searches for the new co-efficient in the corresponding direction. The search will culminate when consecutive BLEU scores show a marginal difference~\ref{aline:condition}. As can be seen in the figure ~\ref{fig:condor}, we started with a value of 0.85 for the direct system from Mawu to English. This got a BLEU score of 10.21. If we had taken a heuristic approach, we would have just taken 0.50 and 0.50, and stopped. Alternatively, we might have tried 0.50, 0.60, 0.70 and 0.80~\cite{Nakov:12}, keeping in mind the different domains. But, neither strategy would have helped us reach our best BLEU score of 10.91, observed with $\lambda_{d}$ = 0.612962. If we use uniform weights for both the tables, we get BLEU scores on heldout as shown in Table~\ref{table:all_results}. In three of four cases, we would not have out-performed our baseline. 
+	Algorithm~\ref{algo:condor} explains the process of using CONDOR~\cite{Condor:05} to find the best interpolation co-efficient for a given direct and triangulated model. Note that the approach can be easily extended to multiple triangulated models or different co-efficients for each feature. Line~\ref{aline:inter} interpolates the two translation models using equation~\eqref{eq:interpolation}. We re-tune the log-linear weights using MERT for the interpolated feature values (on the same tuning data as the baseline) and use the tuned model to find BLEU score on the same heldout set. Based on the difference between the BLEU score obtained and the previous BLEU(line~\ref{aline:search}), CONDOR searches for the new co-efficient in the corresponding direction. The search will culminate when consecutive BLEU scores show a marginal difference~\ref{aline:condition}. As can be seen in the figure ~\ref{fig:condor}, we started with a value of 0.85 for the direct system from Mawu to English. This got a BLEU score of 10.21.  If we had taken a heuristic approach, we would have just taken 0.50 and 0.50, and stopped. Alternatively, we might have tried 0.50, 0.60, 0.70 and 0.80~\cite{Nakov:12}, keeping in mind the different domains. But, neither strategy would have helped us reach our best BLEU score of 10.91, observed with $\lambda_{d}$ = 0.612. If we use uniform weights for both the tables, we get BLEU scores on heldout as shown in Table~\ref{table:all_results}. In three of four cases, we would not have out-performed our baseline. 
+
+	\begin{table*}
+	\footnote
+	\tiny
+	\begin{tabular}{lr} 
+		\toprule
+		$\lambda_{d}$ & BLEU \\
+		\toprule
+		0.85 & 10.01 \\
+		0.95 & 10.21 \\
+		0.63 & 10.43 \\
+		0.53 & 10.41 \\
+		0.612 & 10.91 \\
+		\bottomrule
+	\end{tabular}
+	\caption{BLEU scores with various $\lambda_{d}$ values}
+	\end{table*} 
+
+
 
 	
 \begin{comment}
@@ -325,13 +350,13 @@ In this paper, we consider and answer the questions raised above for real-world 
 \section{Results}
 \label{sec:results}
 	\subsection{Baselines}
-		The baseline BLEU are reported in Table~\ref{sec:results}. All the BLEU scores are reported on the held-out data. For Haitian Kreyol, our BLEU score is +0.6 BLEU points more than the best system from the 2011 Workshop on Haitian Kreyol. We have another baseline we compare against, and that is the BLEU score we can reach if we assumed uniform weights for both baseline and triangulated translation models. 
+		The baseline BLEU are reported in Table~\ref{sec:results}. All the BLEU scores are reported on the held-out data. For Haitian Kreyol, our BLEU score is +0.6 BLEU points more than the best system from the 2011 Workshop on Haitian Kreyol. We have another baseline we compare against, and that is the BLEU score we can reach if we assumed uniform weights for both baseline and triangulated translation models.  
 
 	\subsection{Design Choices: Results}
 
-	Despite using a disjoint and out-of-domain Bible as source pivot and Europarl as pivot target, both Haitian-Creole and Malagasy lead to a better BLEU score on using an interpolated model compared to both our baselines. As indicated in the example in section~\ref{sec:interpolation}, words that were mistranslated earlier get the right translations after pivoting via a large and clean fr-en phrase table. 
+	Despite using a disjoint and out-of-domain Bible as source pivot and Europarl as pivot target, both Haitian-Creole and Malagasy lead to a better BLEU score on using an interpolated model compared to both our baselines. As indicated in the example in Section~\ref{sec:interpolation}, words that were mistranslated earlier get the right translations after pivoting via a large and clean fr-en phrase table. 
 
-	For both Mawukakan and Maninkakan, the BLEU scores show a more significant increase of 2.2 and 1.5 BLEU points respectively for the top-n interpolation model. As the training and source pivot corpora for both comprises commonly spoken sentences that are not very long, the English side of Europarl effectively augments the limited target side of the training corpus, thus, leading to better translations after interpolation. 
+	For both Mawukakan and Maninkakan, the BLEU scores show a more significant increase of 2.2 and 1.5 BLEU points respectively for the product interpolation model. As the training and source pivot corpora for both comprises commonly spoken sentences that are not very long, the English side of Europarl effectively augments the limited target side of the training corpus, thus, leading to better translations after interpolation. 
 
 	Intuitively, the two connectivity features should penalize the spurious and less aligned phrases, thus, reducing the noise and rewarding the just translations. But, the effect is not observed in the BLEU scores. Except in the case of Haitian Kreyol where it improves by a small margin, adding the two connectivity features reduces the BLEU score. This could be owing to the fact that the source pivot data is tiny and the intersection of the alignments with the clean Europarl alignments is leading to feature values that do not effectively discriminate between the good and bad translation pairs. For instance, in Mawukakan and Maninkakan, 60\% and 66\% phrase pairs have a source connectivity strength of more than 0.5 while 67\% and 69\% have more than 0.5 in the backward direction.~\newcite{Ahmed:13} found the two features useful translating Persian to Arabic via English, thus, going from a morphologically complex language to another complex language via a simpler language in the form of English. 
 
@@ -352,7 +377,7 @@ In this paper, we consider and answer the questions raised above for real-world 
 		\small
 		\centering
 		\includegraphics[width=0.45\textwidth]{Figures/condor_run.eps}
-		\caption{Grid search over interpolation co-effs leading to a best BLEU of 10.91 using $\lambda_{d}$ = 0.612962}
+		\caption{Grid search over interpolation co-effs leading to a best BLEU of 10.91 using $\lambda_{d}$ = 0.612}
 		\label{fig:condor}
 	\end{figure}
 
@@ -367,12 +392,19 @@ In this paper, we consider and answer the questions raised above for real-world 
 		\label{table:examples}
 	\end{table*}
 
+	In the Table~\ref{table:examples}, we report examples of improvements in translations. In the first example, we observe that two words that were OOVs for our baseline model have translations after triangulation \& interpolation. In the second and third examples, we observe that triangulation leads to better translations. ``The entrance of the child'' is the only translation for the source phrase \emph{$l\acute{a}$} while after triangulation, we have several translations. In case of ``tranblemannt\`e'', our baseline model has several English translations but none of them mention ``earthquake''. They lead to shaking, tension, of the earthquake, but not the word ``earthquake''. 
+
 	\subsection{Significance Tests}
+
+		We report p-values obtained using multeval~\cite{Clark:11} comparing our best performing against two baselines. The results are reported in Table~\ref{table:significance}. We observe that our best system for Mawukakan and Maninkakan is significantly better than our baseline system, while the interpolated system with uniform weights (no iterative learning) achieves comparable performance to our best system. 
+
+		On the other hand, our best system for Haitian Kreyol and Malagasy is not significant with p<0.05 compared to our baseline. However, it is significantly better than what we would have achieved had we used uniform weights. 
 		\begin{table*}
-			\small
-			\centering
+			\footnote
+			\tiny
 			\input{Tables/Significance.tex}
-			\caption{Significance p-values: Our best compared to our baseline, and Uniform is the system with same weight for both baseline \& triangulated. All use the same tuning and heldout set}
+			\caption{p-values: Our best compared to our baseline, and Uniform is the system with same weight for both baseline \& triangulated. All use the same tuning and heldout set}
+			\label{table:significance}
 		\end{table*}
 
 
@@ -388,12 +420,11 @@ In this paper, we consider and answer the questions raised above for real-world 
 
 	The second approach is the pivot-based approach where a triangulated phrase table is generated between the source and target, by using the common pivot phrases between the source pivot and pivot target tables~\cite{Utiyama:07,Cohn:07}. Thus, the triangulated table largely depends on the number of target phrases in the source pivot table. Having a very small source pivot table leads to a relatively smaller triangulated table owing to the fewer number of common pivot phrases with the pivot target system. Across all our experiments, the pivot target system uses Europarl v7, comprising approximately 2 million parallel sentences. But our source pivot for Maninkakan, Mawukakan, Haitian-Creole and Malagasy has 4k, 5k, 30k and 30k parallel sentences respectively.~\newcite{Utiyama:07} observed that the triangulated table was able to achieve comparable BLEU scores to the direct system for French, German and Spanish. This could be owing to the fact that the data comprised multi-parallel 560K sentences.~\newcite{Cohn:07} observe that multiple pivot languages lead to more fluent translations compared to one pivot language. Multiple pivot language lead to multiple alternative translations, thus, increasing phrase coverage and rewarding the more appropriate translations and reducing out-of-vocabulary words further. They also propose a systematic way of combining the triangulated translation model with the direct model using linear interpolation and log-linear interpolation, although they assume a uniform weight for both the models.~\cite{Wu:09} compare~\cite{Utiyama:07} and~\cite{Cohn:07} but using data from a spoken language task. Moreover, the specific design choices one needs to make in pivot-based triangulation are not discussed. Finally, the data was in the same domain as well.~\cite{Bertoldi:08} propose using monolingual data more effectively and suggest sampling methods to improve the translations with triangulation. 
 
-	To our best knowledge, Malagasy, Maninkakan and Mawukakan have not been studied before in the SMT literature. Although 9 systems participated in the workshop task on Haitian-Creole, the approach of triangulation via French was not used.
+	To our best knowledge, Malagasy, Maninkakan and Mawukakan have not been studied before in the SMT literature. Although 9 systems participated in the workshop task on Haitian Kreyol, the approach of triangulation via French was not used.
 \end{comment}
 \section{Conclusion}
 
-In this paper we have shown that triangulation can be an effective method to use a pivot language to inject additional training data for a low-resource language pair. This was shown in a realistic data settings with real-world low resource languages and impoverished pivot language resources for these low-resource languages. In all cases, triangulation combined with the direct system helped improve translation quality. Our experiments show that paying attention to domain adaptation issues between the original language pair and the pivot language resources helped substantially.
-
+In this paper, we answered the questions raised in Section 1 about using triangulation for low-resource languages. We found that making intelligent design choices leads to small but consistent gains. We also observed that iterating over model weights for interpolation works out better than choosing weights heuristically (or uniform weights). This effect is more pronounced when using disjoint corpora for triangulation. 
 
 \bibliographystyle{acl2014}
 \bibliography{short}

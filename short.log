@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  24 FEB 2014 21:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  3 MAR 2014 16:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -665,13 +665,15 @@ File: omsptm.fd
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 55.
+
+(./Tables/datasettings.tex)
 Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no ± in font ptmr7t!
 Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no ± in font ptmr7t!
 
-Underfull \hbox (badness 2828) in paragraph at lines 61--62
-\OT1/ptm/m/n/10.95 multi-parallel Eu-roparl sen-tences and a low-
+Underfull \hbox (badness 1072) in paragraph at lines 72--73
+\OT1/ptm/m/n/10.95 in the same do-main as the orig-i-nal resource-
  []
 
 [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
@@ -679,102 +681,87 @@ Underfull \hbox (badness 2828) in paragraph at lines 61--62
 
 
 ]
-(./Tables/datasettings.tex)
-
-LaTeX Warning: Reference `sec:topn' on page 2 undefined on input line 155.
-
-
-LaTeX Warning: Reference `sec:topn' on page 2 undefined on input line 174.
-
-
-LaTeX Warning: Reference `sec:topn' on page 2 undefined on input line 174.
-
-LaTeX Font Info:    Calculating math sizes for size <13.13995> on input line 17
-9.
-
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13.13995> not available
-(Font)              size <12> substituted on input line 179.
-
-
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <6.56998> not available
-(Font)              size <7> substituted on input line 179.
-
-
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <13.13995> not available
-(Font)              size <12> substituted on input line 179.
-
-
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <6.56998> not available
-(Font)              size <7> substituted on input line 179.
-
-
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13.13995> not available
-(Font)              size <12> substituted on input line 179.
-
-
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <6.56998> not available
-(Font)              size <7> substituted on input line 179.
-
-
-LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <13.13995> not available
-(Font)              size <12> substituted on input line 179.
-
-
-LaTeX Font Warning: Font shape `U/lasy/m/n' in size <13.13995> not available
-(Font)              size <12> substituted on input line 179.
-
-
-LaTeX Font Warning: Font shape `U/lasy/m/n' in size <6.56998> not available
-(Font)              size <7> substituted on input line 179.
-
-
-Underfull \hbox (badness 1237) in paragraph at lines 182--183
-\OT1/ptm/m/n/10.95 score does not re-flect the ac-tual many-to-one
- []
-
-[2]
-Underfull \hbox (badness 1354) in paragraph at lines 217--218
+Underfull \hbox (badness 1354) in paragraph at lines 183--184
 \OT1/ptm/m/n/10.95 ex-tracted from the align-ments. As we have
  []
 
-[3]
+[2]
+LaTeX Font Info:    Calculating math sizes for size <13.13995> on input line 20
+4.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13.13995> not available
+(Font)              size <12> substituted on input line 204.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <6.56998> not available
+(Font)              size <7> substituted on input line 204.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <13.13995> not available
+(Font)              size <12> substituted on input line 204.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <6.56998> not available
+(Font)              size <7> substituted on input line 204.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13.13995> not available
+(Font)              size <12> substituted on input line 204.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <6.56998> not available
+(Font)              size <7> substituted on input line 204.
+
+
+LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <13.13995> not available
+(Font)              size <12> substituted on input line 204.
+
+
+LaTeX Font Warning: Font shape `U/lasy/m/n' in size <13.13995> not available
+(Font)              size <12> substituted on input line 204.
+
+
+LaTeX Font Warning: Font shape `U/lasy/m/n' in size <6.56998> not available
+(Font)              size <7> substituted on input line 204.
+
+
+Underfull \hbox (badness 1107) in paragraph at lines 207--208
+\OT1/ptm/m/n/10.95 phrases trans-lat-ing into good and some noisy
+ []
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 238.
-
-
-LaTeX Warning: Citation `condor-practice' on page 4 undefined on input line 272
-.
-
-
-Underfull \hbox (badness 1137) in paragraph at lines 292--293
-\OT1/ptm/m/n/10.95 Refer to Ta-ble 2[] for de-tails about the dis-tri-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 260.
+[3]
+Underfull \hbox (badness 1137) in paragraph at lines 317--318
+\OT1/ptm/m/n/10.95 Refer to Ta-ble 3[] for de-tails about the dis-tri-
  []
 
 
-Underfull \hbox (badness 1062) in paragraph at lines 292--293
+Underfull \hbox (badness 1062) in paragraph at lines 317--318
 \OT1/ptm/m/n/10.95 bu-tion of data for the four lan-guages. Data
  []
 
-[4] (./Tables/devsets.tex)
-Underfull \hbox (badness 1221) in paragraph at lines 332--333
+(./Tables/devsets.tex) [4]
+Underfull \hbox (badness 1221) in paragraph at lines 357--358
 \OT1/ptm/m/n/10.95 Haitian-Creole and Mala-gasy lead to a bet-ter
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 334--335
+Underfull \hbox (badness 1117) in paragraph at lines 359--360
 []\OT1/ptm/m/n/10.95 For both Mawukakan and Maninkakan, the
  []
 
 (./Tables/all-results.tex)
 Package epstopdf Info: Source file: <Figures/condor_run.eps>
-(epstopdf)                    date: 2014-02-21 22:42:54
-(epstopdf)                    size: 18752 bytes
+(epstopdf)                    date: 2014-03-03 16:48:04
+(epstopdf)                    size: 23258 bytes
 (epstopdf)             Output file: <Figures/condor_run-eps-converted-to.pdf>
-(epstopdf)                    date: 2014-02-21 22:42:54
-(epstopdf)                    size: 9218 bytes
+(epstopdf)                    date: 2014-03-03 16:48:12
+(epstopdf)                    size: 13698 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/condor_run-eps-con
 verted-to.pdf Figures/condor_run.eps>
-(epstopdf)             \includegraphics on input line 354.
+(epstopdf)             \includegraphics on input line 379.
 Package epstopdf Info: Output file is already uptodate.
 
 <Figures/condor_run-eps-converted-to.pdf, id=36, 433.62pt x 289.08pt>
@@ -782,19 +769,23 @@ File: Figures/condor_run-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Figures/condor_run-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/condor_run-eps-converted-to.pdf used on input 
-line 354.
+line 379.
 (pdftex.def)             Requested size: 204.85844pt x 136.57336pt.
  (./Tables/BeforeAfter.tex)
-Overfull \hbox (309.14922pt too wide) in paragraph at lines 1--366
+Overfull \hbox (309.14922pt too wide) in paragraph at lines 1--391
  [][] 
  []
 
-(./Tables/Significance.tex) [5 <./Figures/condor_run-eps-converted-to.pdf>]
-(./short.bbl
+[5 <./Figures/condor_run-eps-converted-to.pdf>]
+Underfull \hbox (badness 1917) in paragraph at lines 399--400
+\OT1/ptm/m/n/10.95 et al., 2011) com-par-ing our best per-form-ing
+ []
+
+(./Tables/Significance.tex) (./short.bbl
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 
-Underfull \hbox (badness 1400) in paragraph at lines 4--10
+Underfull \hbox (badness 1400) in paragraph at lines 11--17
 []\OT1/ptm/m/n/10 Peter F. Brown, Vin-cent J. Della Pietra, Stephen
  []
 
@@ -805,7 +796,7 @@ Missing character: There is no © in font ptmr7t!
 Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no ± in font ptmr7t!
 
-Underfull \hbox (badness 2762) in paragraph at lines 62--68
+Underfull \hbox (badness 2762) in paragraph at lines 67--73
 \OT1/ptm/m/n/10 Brooke Cowan, Wade Shen, Chris-tine Moran,
  []
 
@@ -817,20 +808,17 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.13995pt have occurred.
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 13064 strings out of 493315
- 241250 string characters out of 6137904
- 302445 words of memory out of 5000000
- 16187 multiletter control sequences out of 15000+600000
+ 13066 strings out of 493315
+ 241279 string characters out of 6137904
+ 302497 words of memory out of 5000000
+ 16189 multiletter control sequences out of 15000+600000
  32044 words of font info for 71 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,13n,55p,1970b,560s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,13n,55p,1970b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
 xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
@@ -850,9 +838,9 @@ s/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2013/texmf-dist/fonts/
 type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/
 times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on short.pdf (7 pages, 201510 bytes).
+Output written on short.pdf (7 pages, 205052 bytes).
 PDF statistics:
- 120 PDF objects out of 1000 (max. 8388607)
+ 131 PDF objects out of 1000 (max. 8388607)
  80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
