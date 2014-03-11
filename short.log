@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.8.18)  10 MAR 2014 19:34
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.8.18)  11 MAR 2014 12:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -680,7 +680,7 @@ Missing character: There is no ± in font ptmr7t!
 Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no ± in font ptmr7t!
 
-Underfull \hbox (badness 1708) in paragraph at lines 73--74
+Underfull \hbox (badness 1708) in paragraph at lines 74--75
 \OT1/ptm/m/n/10.95 All the pa-pers that use tri-an-gu-la-tion cite ei-
  []
 
@@ -688,90 +688,95 @@ Underfull \hbox (badness 1708) in paragraph at lines 73--74
 
 
 
-] [2]
-Underfull \hbox (badness 1354) in paragraph at lines 188--189
+]
+Underfull \vbox (badness 3557) has occurred while \output is active []
+
+ [2]
+Underfull \hbox (badness 1354) in paragraph at lines 191--192
 \OT1/ptm/m/n/10.95 ex-tracted from the align-ments. As we have
  []
 
-LaTeX Font Info:    Calculating math sizes for size <13.13995> on input line 20
-9.
+LaTeX Font Info:    Calculating math sizes for size <13.13995> on input line 21
+2.
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13.13995> not available
-(Font)              size <12> substituted on input line 209.
+(Font)              size <12> substituted on input line 212.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <6.56998> not available
-(Font)              size <7> substituted on input line 209.
+(Font)              size <7> substituted on input line 212.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <13.13995> not available
-(Font)              size <12> substituted on input line 209.
+(Font)              size <12> substituted on input line 212.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <6.56998> not available
-(Font)              size <7> substituted on input line 209.
+(Font)              size <7> substituted on input line 212.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13.13995> not available
-(Font)              size <12> substituted on input line 209.
+(Font)              size <12> substituted on input line 212.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <6.56998> not available
-(Font)              size <7> substituted on input line 209.
+(Font)              size <7> substituted on input line 212.
 
 
 LaTeX Font Warning: Font shape `OMX/cmex/m/n' in size <13.13995> not available
-(Font)              size <12> substituted on input line 209.
+(Font)              size <12> substituted on input line 212.
 
 
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <13.13995> not available
-(Font)              size <12> substituted on input line 209.
+(Font)              size <12> substituted on input line 212.
 
 
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <6.56998> not available
-(Font)              size <7> substituted on input line 209.
+(Font)              size <7> substituted on input line 212.
 
 
-Underfull \hbox (badness 1107) in paragraph at lines 212--213
+Underfull \hbox (badness 1107) in paragraph at lines 215--216
 \OT1/ptm/m/n/10.95 phrases trans-lat-ing into good and some noisy
  []
 
 [3]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 266.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 269.
 
-Underfull \hbox (badness 1137) in paragraph at lines 346--347
+Underfull \hbox (badness 1137) in paragraph at lines 366--367
 \OT1/ptm/m/n/10.95 Refer to Ta-ble 3[] for de-tails about the dis-tri-
  []
 
 
-Underfull \hbox (badness 1062) in paragraph at lines 346--347
+Underfull \hbox (badness 1062) in paragraph at lines 366--367
 \OT1/ptm/m/n/10.95 bu-tion of data for the four lan-guages. Data
  []
 
 [4] (./Tables/devsets.tex)
-Underfull \hbox (badness 1546) in paragraph at lines 386--387
+Underfull \hbox (badness 1546) in paragraph at lines 406--407
 []\OT1/ptm/m/n/10.95 Despite us-ing a dis-joint and out-of-domain
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 388--389
+Underfull \hbox (badness 1117) in paragraph at lines 408--409
 []\OT1/ptm/m/n/10.95 For both Mawukakan and Maninkakan, the
  []
 
+
+Underfull \vbox (badness 5681) has occurred while \output is active []
+
+ [5]
 (./Tables/all-results.tex)
-Underfull \hbox (badness 1917) in paragraph at lines 451--452
+Underfull \hbox (badness 1917) in paragraph at lines 471--472
 \OT1/ptm/m/n/10.95 et al., 2011) com-par-ing our best per-form-ing
  []
 
-[5] (./Tables/Significance.tex)
-Underfull \hbox (badness 2213) in paragraph at lines 453--461
+(./Tables/Significance.tex)
+Underfull \hbox (badness 2213) in paragraph at lines 473--481
 \OT1/ptm/m/n/10.95 Kreyol and Mala-gasy is not sig-nif-i-cant with
  []
 
 (./short.bbl
-Underfull \vbox (badness 1028) has occurred while \output is active []
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 
@@ -785,12 +790,12 @@ Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no © in font ptmr7t!
 Missing character: There is no Ã in font ptmr7t!
 Missing character: There is no ± in font ptmr7t!
-[6]
+
 Underfull \hbox (badness 2762) in paragraph at lines 67--73
 \OT1/ptm/m/n/10 Brooke Cowan, Wade Shen, Chris-tine Moran,
  []
 
-) [7
+[6] [7]) [8
 
 ] (./short.aux)
 
@@ -802,13 +807,13 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 13064 strings out of 493315
- 242840 string characters out of 6135240
- 303700 words of memory out of 5000000
- 16190 multiletter control sequences out of 15000+600000
+ 13066 strings out of 493315
+ 242879 string characters out of 6135240
+ 304720 words of memory out of 5000000
+ 16192 multiletter control sequences out of 15000+600000
  30360 words of font info for 69 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,11n,55p,1970b,559s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,11n,55p,1970b,561s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local-rscn/TeX_Live_2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/l
 ocal-rscn/TeX_Live_2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
 usr/local-rscn/TeX_Live_2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
@@ -829,10 +834,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local-rscn/TeX_Live_201
 _2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local-rscn/TeX_Live_201
 3/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local-rscn/TeX_Live_2013/te
 xmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on short.pdf (7 pages, 195682 bytes).
+Output written on short.pdf (8 pages, 196053 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
+ 107 PDF objects out of 1000 (max. 8388607)
+ 78 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

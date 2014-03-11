@@ -54,9 +54,10 @@ Faced with a low-resource language pair, several questions arise when using tria
 \begin{itemize}\addtolength{\itemsep}{-0.4\baselineskip}
 	\item How large should the triangulated table be? 
 	\item What is the best way to compute feature values in the triangulated phrase table? 
-	\item Do we use uniform weights or heuristic values to interpolate the direct and triangulated models?
-	\item How does one penalize triangulated phrase pairs with insufficient alignment between the words in the phrase pairs? 
+	\item Do we use uniform weights or heuristic values to interpolate the direct and triangulated models? 
 \end{itemize}
+
+The two main contributions of this paper are that we answer the questions raised above for four real low-resource languages and we also propose an iterative method to find the best interpolation co-efficient for a given language pair. 
 
 
 
@@ -127,7 +128,8 @@ Faced with a low-resource language pair, several questions arise when using tria
 \section{Models}
 \label{sec:models}
 	
-	Given a source language \emph{s}, pivot language \emph{p} and target language \emph{t}, pivot-based triangulation uses common pivot phrases between the source pivot phrase table \emph{p$_{sp}$} and pivot target \emph{p$_{pt}$} to generate a new phrase table between source and target. To compute feature values for this generated table,~\cite{Utiyama:07} use product of the features on the source pivot and pivot target tables (both lexical and phrase features), while~\cite{Cohn:07} use an IBM Model 1 score for the lexical features while taking a joint probability and using the conditionals for the phrase scores.~\cite{Cohn:07} use linear and log-linear interpolation to combine the models (but the log-linear weights are not re-learnt) while~\cite{Nakov:12} try various heuristic values. To penalize phrase pairs with poor alignments,~\cite{Ahmed:13} add two new features to the log-linear model. In this section, we briefly discuss these design choices involved in the usage of triangulation. 
+	
+	Given a source language \emph{s}, pivot language \emph{p} and target language \emph{t}, pivot-based triangulation uses common pivot phrases between the source pivot phrase table \emph{p$_{sp}$} and pivot target \emph{p$_{pt}$} to generate a new phrase table between source and target. As the triangulated table is generated using common phrases, the feature values cannot be computed using the alignments and co-occurence counts. We discuss two ways of computing phrase scores in section~\ref{sec:phrase_scores} and two ways of computing lexical scores~\ref{sec:lexical_scores}. Keeping in mind the different domains, interpolation of the direct and triangulated systems will serve dual-purpose of reducing OOVs and adding better translations for existing phrases. In Section~\ref{sec:interpolation}, we propose a new iterative method to do linear interpolation.  
 
 
 
@@ -154,6 +156,7 @@ Faced with a low-resource language pair, several questions arise when using tria
 	\end{table}
 \end{comment}
 \subsection{Phrase Scores}
+\label{sec:phrase_scores}
 \subsubsection{Product Approach}
 	
 	An often cited approach to compute feature values is from~\cite{Utiyama:07}, where we multiply the values on the source pivot and pivot target phrase tables, as shown in equations~\eqref{eq:forward} and~\eqref{eq:backward}. 
@@ -188,7 +191,7 @@ Faced with a low-resource language pair, several questions arise when using tria
 	This is a more accurate description of the joint probability of the (s, t) phrase pair in the triangulated table because we are using source pivot and pivot target counts, both of which have been extracted from the alignments. As we have the counts for the direct system, computing the joint and the conditional distributions is relatively straight-forward. 
 
 \subsection{Lexical Scores}
-
+\label{sec:lexical_scores}
 \subsection{Product Approach}
 	Similar to phrase scores, we compute the triangulated lexical scores using the product of the lexical scores of the source pivot and pivot target tables.   
 
@@ -242,7 +245,7 @@ Faced with a low-resource language pair, several questions arise when using tria
 
 \subsection{Translation Model Combination}
 \label{sec:interpolation}
-	For Haitian Kreyol, we are trying to improve translations for real-world short messages using common phrases between Bible and parlimentary proceedings. For Malagasy, we are trying to do the same for news articles. To get the best of both worlds, we would want a $\lambda_{d}$ in equation~\eqref{eq:interpolation} which maximizes our BLEU score, where $p_{d}$ represents the direct translation model while $p_{t}$ represents the triangulated translation model. The question is: Do we use uniform weights~\cite{Cohn:07} or try various heuristic values~\cite{Nakov:12} and re-learn the log-linear weights? Can we do better? 
+	For Haitian Kreyol, we are trying to improve translations for real-world short messages using common phrases between Bible and parlimentary proceedings. For Malagasy, we are trying to do the same for news articles. To get the best of both worlds, we would want a $\lambda_{d}$ in equation~\eqref{eq:interpolation} which maximizes our BLEU score, where $p_{d}$ represents the direct translation model while $p_{t}$ represents the triangulated translation model. The question is: Do we use uniform weights~\cite{Cohn:07} or try various heuristic values~\cite{Nakov:12} and re-learn the log-linear weights? If our data was multi-parallel, uniform weights would be a sensible approach. Can we do better? 
 
 
 	\begin{equation} \label{eq:interpolation}
@@ -258,7 +261,7 @@ Faced with a low-resource language pair, several questions arise when using tria
 	\end{comment}
 
 	
-
+	\subsubsection{Algorithm}
 	\begin{algorithm}
 		\small
 		\caption{Grid Search for Interpolation}
@@ -281,9 +284,26 @@ Faced with a low-resource language pair, several questions arise when using tria
 		\end{algorithmic}
 	\end{algorithm}
 
-	Algorithm~\ref{algo:condor} explains an iterative method that learns the best $\lambda_{d}$  using CONDOR~\cite{Condor:05}. Note that the approach can be easily extended to multiple triangulated models or different co-efficients for each feature. Line~\ref{aline:inter} interpolates the two translation models using equation~\eqref{eq:interpolation}. We re-tune the log-linear weights using MERT for the interpolated feature values (on the same tuning data as the baseline) and use the tuned model to find BLEU score on the same heldout set. Based on the difference between the BLEU score obtained and the previous BLEU (Line~\ref{aline:search}), CONDOR searches for the new co-efficient in the corresponding direction. The search will culminate when consecutive BLEU scores show a marginal difference (Line~\ref{aline:condition}). We start with a value of 0.85 for the direct system from Mawu to English (Table~\ref{table:condor_run}). This gets a BLEU score of 9.1.  If we had taken a uniform approach, we would have just taken 0.50 and 0.50, and stopped. If we use uniform weights for both the tables, we get BLEU scores on heldout as shown in Table~\ref{table:all_results}. In three of four cases, we would not have out-performed our baseline. Alternatively, we might have tried 0.50, 0.60, 0.70 and 0.80~\cite{Nakov:12}, keeping in mind the different domains. Although 0.70 would have given us our best BLEU for this pair, we observed that different design choices led to different interpolation weights, and this was different for different languages (Haitian Kreyol and Malagasy have disjoint systems). Essentially, our method is an iterative method that will systematically lead to the best possible BLEU score for the given models. 
+	Algorithm~\ref{algo:condor} explains an iterative method that learns the best $\lambda_{d}$  using CONDOR~\cite{Condor:05}. Note that the approach can be easily extended to multiple triangulated models or different co-efficients for each feature. Line~\ref{aline:inter} interpolates the two translation models using equation~\eqref{eq:interpolation}. We re-tune the log-linear weights using MERT for the interpolated feature values (on the same tuning data as the baseline) and use the tuned model to find BLEU score on the same heldout set. Based on the difference between the BLEU score obtained and the previous BLEU (Line~\ref{aline:search}), CONDOR searches for the new co-efficient in the corresponding direction. The search will culminate when consecutive BLEU scores show a marginal difference (Line~\ref{aline:condition}). For instance, we start with a value of 0.85 for the direct system from Mawu to English. This gets a BLEU score of 9.10.  If we use uniform weights for both the tables, we get BLEU scores on heldout as shown in Table~\ref{table:all_results}. In three of four cases, we would not have out-performed our baseline. Alternatively, we can try 0.50, 0.60, 0.70 and 0.80~\cite{Nakov:12}, keeping in mind the different domains. Although 0.70 would have given us our best BLEU for this pair, we observed that different languages led to different interpolation weights (Table~\ref{table:condor_run}), and this was different for different design choices (Haitian Kreyol and Malagasy have disjoint systems). Essentially, our method is an iterative method that will systematically lead to the best possible BLEU score for the given models.  
 
+	\begin{table*}
+		\footnote
+		\tiny
+		\begin{tabular}{lr}
+		\toprule
+		Language & Best $\lambda_{d}$ \\
+		\toprule
+		Mawukakan & 0.84 \\
+		Maninkakan & 0.75 \\
+		Haitian Kreyol & 0.95 \\
+		Malagasy & 0.82 \\
+		\bottomrule
+		\end{tabular}
+		\caption{Different languages have different interpolation co-efficients that lead to the best system. Although we always start with 0.85, we iterate systematically over different values to obtain the best co-efficient}
+		\label{table:condor_run}
+	\end{table*}
 
+	\begin{comment}
 	\begin{table*}
 	\footnote
 	\tiny
@@ -302,7 +322,7 @@ Faced with a low-resource language pair, several questions arise when using tria
 	\caption{BLEU scores with various $\lambda_{d}$ values}
 	\label{table:condor_run}
 	\end{table*}
-
+	\end{comment}
 
 
 	\begin{comment}
@@ -336,8 +356,8 @@ Faced with a low-resource language pair, several questions arise when using tria
 		\label{table:half}
 	\end{table}
 \end{comment}
-
-	
+	\subsection{Summary:Design Choices}
+		~\newcite{Utiyama:07} reported results using the product approach with Europarl proceedings but did not use any form of interpolation to combine the models.~\newcite{Cohn:07} found that using a Model 1 score for lexical features helped and also proposed methods to interpolate the models, but used uniform weights.~\newcite{Nakov:12} tried various heuristic values and picked the one that performed the best on the development set. In the section above, we discussed the various design choices one needs to pay attention to when using triangulation. In the next section, we report the results of these choices for the four low-resource languages. 
 
 \section{Experiments}
 \label{sec:experiments}
@@ -448,7 +468,7 @@ Faced with a low-resource language pair, several questions arise when using tria
 
 	\subsection{Significance Tests}
 
-		We report p-values obtained using multeval~\cite{Clark:11} comparing our best performing against two baselines. The results are reported in Table~\ref{table:significance}. We observe that our best system for Mawukakan and Maninkakan is significantly better than our baseline system, while the interpolated system with uniform weights (no iterative learning) achieves comparable performance to our best system. 
+		We report p-values obtained using multeval~\cite{Clark:11} comparing our best performing against two baselines. The results are reported in Table~\ref{table:significance}. We observe that our best system for Mawukakan and Maninkakan is significantly better than our baseline system, while the interpolated system with uniform weights achieves comparable performance to our best system. 
 
 		On the other hand, our best system for Haitian Kreyol and Malagasy is not significant with p$<$0.05 compared to our baseline. However, it is significantly better than what we would have achieved had we used uniform weights. 
 		\begin{table*}
