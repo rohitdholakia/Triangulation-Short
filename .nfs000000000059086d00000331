@@ -1,0 +1,73 @@
+\relax 
+\citation{Utiyama:07,Cohn:07}
+\citation{Utiyama:07}
+\citation{Cohn:07}
+\citation{Cohn:07}
+\citation{Utiyama:07}
+\citation{Cohn:07}
+\citation{Nakov:12,Nakovemnlp:12,Gispert:06,Huck:12}
+\citation{Utiyama:07}
+\citation{Cohn:07}
+\citation{Nakov:12}
+\citation{Nakovemnlp:12}
+\citation{Gispert:06}
+\citation{Huck:12}
+\citation{Utiyama:07}
+\citation{Cohn:07}
+\citation{Utiyama:07}
+\citation{Cohn:07}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{table:datasettings_differences}{{1}{2}}
+\newlabel{sec:models}{{2}{2}}
+\newlabel{eq:forward}{{1}{2}}
+\newlabel{eq:backward}{{2}{2}}
+\newlabel{sec:joint}{{2.1.2}{2}}
+\citation{Brown:1993}
+\citation{Dempster:77}
+\citation{Ahmed:13}
+\citation{Cohn:07}
+\citation{Nakov:12}
+\citation{Condor:05}
+\citation{Nakov:12}
+\newlabel{sec:model1}{{2.4}{3}}
+\newlabel{sec:strength}{{2.5}{3}}
+\newlabel{sec:interpolation}{{2.6}{3}}
+\newlabel{eq:interpolation}{{6}{3}}
+\newlabel{algo:condor}{{1}{3}}
+\newlabel{aline:condition}{{1}{3}}
+\newlabel{aline:inter}{{2}{3}}
+\newlabel{aline:search}{{7}{3}}
+\citation{Koehn:07}
+\citation{OchNey:03}
+\citation{Papineni:02}
+\citation{Och:03}
+\citation{Stolcke:02}
+\citation{Ken:11}
+\newlabel{sec:experiments}{{3}{4}}
+\newlabel{table:ddtt}{{3}{4}}
+\newlabel{sec:results}{{4}{4}}
+\citation{Ahmed:13}
+\citation{Clark:11}
+\newlabel{fig:condor}{{1}{5}}
+\bibstyle{acl2014}
+\bibdata{short}
+\bibcite{Condor:05}{\citename {Berghen and Bersini}2005}
+\bibcite{Brown:1993}{\citename {Brown \bgroup et al.\egroup }1993}
+\bibcite{Clark:11}{\citename {Clark \bgroup et al.\egroup }2011}
+\bibcite{Cohn:07}{\citename {Cohn and Lapata}2007}
+\bibcite{Dempster:77}{\citename {Dempster \bgroup et al.\egroup }1977}
+\bibcite{Gispert:06}{\citename {Gispert and Mariño}2006}
+\bibcite{Ken:11}{\citename {Heafield}2011}
+\bibcite{Huck:12}{\citename {Huck and Ney}2012}
+\bibcite{Ahmed:13}{\citename {Kholy and Habash}2013}
+\bibcite{Koehn:07}{\citename {Koehn \bgroup et al.\egroup }2007}
+\bibcite{Nakov:12}{\citename {Nakov and Ng}2012}
+\bibcite{OchNey:03}{\citename {Och and Ney}2003}
+\newlabel{table:all_results}{{4}{6}}
+\newlabel{table:examples}{{5}{6}}
+\bibcite{Och:03}{\citename {Och}2003}
+\bibcite{Papineni:02}{\citename {Papineni \bgroup et al.\egroup }2002}
+\bibcite{Stolcke:02}{\citename {Stolcke}2002}
+\bibcite{Utiyama:07}{\citename {Utiyama and Isahara}2007}
+\bibcite{Nakovemnlp:12}{\citename {Wang \bgroup et al.\egroup }2012}
+\newlabel{table:significance}{{6}{7}}
