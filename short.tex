@@ -97,8 +97,8 @@ Faced with a low-resource language pair, this paper provides the following contr
 \label{sec:joint}
 	\cite{Cohn:07} propose using the joint probability $p_{w}(s, t)$ to calculate the triangulated phrase scores $p_{w}(t \mid s)$ and $p_{w}(s \mid t)$. Since we do not have observed counts in the triangulated phrase table, counting the pairs after triangulation will not be a true reflection of the joint probability. Instead, for a triangulated table between \emph{s} and \emph{t}, using source pivot phrase table \emph{sp} and pivot target phrase table \emph{pt}, the joint probability of a phrase pair $(s, t)$ is computed as: 
 	\begin{eqnarray*}
-		p_{tr}(s, t) &=& \sum_{i}p_{sp}(s, i) p_{pt}(i, t) \\
-				&=& \sum_{i}p_{sp}(s \mid i) p_{sp}(i) p_{pt}(i \mid t) p_{pt}(t)
+		p_{tr}(s, t) &=& \sum_{p}p_{sp}(s, p) p_{pt}(p, t) \\
+				&=& \sum_{p}p_{sp}(s \mid p) p_{sp}(p) p_{pt}(p \mid t) p_{pt}(t)
 	\end{eqnarray*} 
 	The counts for the direct system are used to compute the joint and the conditional distributions in this equation.
 	
