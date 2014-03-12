@@ -1,9 +1,9 @@
 \documentclass[11pt]{article}
+\usepackage{acl2014}
 \usepackage{booktabs}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 \usetikzlibrary{positioning}
-\usepackage{acl2014}
 \usepackage{times}
 \usepackage{url}
 \usepackage{hhline}
@@ -15,7 +15,6 @@
 \usepackage{subcaption}
 \usepackage{relsize}
 %\usepackage{hyperref}
-\setlength\titlebox{1.2cm}    % You can expand the title box if you
 % really have to
 \usepackage{comment}
 \usepackage{epstopdf}
@@ -36,6 +35,7 @@
 
 \newcommand{\alert}[1]{{\textcolor{blue}{ALRT: #1}}}
 
+\setlength\titlebox{1.2cm}    % You can expand the title box if you
 \title{Effective Triangulation for Very Low-Resource Languages}
 \author{}
 
@@ -159,19 +159,14 @@ The two main contributions of this paper are that we answer the questions raised
 \label{sec:phrase_scores}
 \subsubsection{Product Approach}
 	
-	An often cited approach to compute feature values is from~\cite{Utiyama:07}, where we multiply the values on the source pivot and pivot target phrase tables, as shown in equations~\eqref{eq:forward} and~\eqref{eq:backward}. 
-
-
-	\begin{equation} \label{eq:forward}
-        p_w(t \mid s) = \sum_{p} p_w(t \mid p) p_w(p \mid s)
-	\end{equation}
-
-	\begin{equation} \label{eq:backward}
-        p_w(s \mid t) = \sum_{p} p_w(s \mid p) p_w(p \mid t)
-	\end{equation}
-
+	An often cited approach to compute feature values for the triangulation phrases is from~\cite{Utiyama:07}, where we multiply the values on the source pivot and pivot target phrase tables:
+	\begin{eqnarray} 
+	    \label{eq:forward}
+        p_w(t \mid s) &=& \sum_{p} p_w(t \mid p) p_w(p \mid s) \\
+        \label{eq:backward}
+        p_w(s \mid t) &=& \sum_{p} p_w(s \mid p) p_w(p \mid t)
+	\end{eqnarray}
 	We are marginalizing over the pivot phrases (p), essentially making an independence assumption of the following form, as in~\cite{Cohn:07}:  
-
 	\begin{eqnarray*}
 		p(t \mid s)&=&\sum_{p}{p(t, p \mid s)}\\
 		&=& \sum_{p}{p(t \mid p, s)\,p(p \mid s)}\\
@@ -195,13 +190,10 @@ The two main contributions of this paper are that we answer the questions raised
 \subsection{Product Approach}
 	Similar to phrase scores, we compute the triangulated lexical scores using the product of the lexical scores of the source pivot and pivot target tables.   
 
-	\begin{equation}
-        p_{lex}(t \mid s) = \sum_{p} p_{lex}(t \mid p) p_{lex}(p \mid s)
-	\end{equation}
-
-	\begin{equation}
-        p_{lex}(s \mid t) = \sum_{p} p_{lex}(s \mid p) p_{lex}(p \mid t)
-	\end{equation}
+	\begin{eqnarray}
+        p_{lex}(t \mid s) &=& \sum_{p} p_{lex}(t \mid p) p_{lex}(p \mid s) \\
+        p_{lex}(s \mid t) &=& \sum_{p} p_{lex}(s \mid p) p_{lex}(p \mid t)
+	\end{eqnarray}
 
 \subsection{IBM Model 1 Alignments}
 \label{sec:model1}
