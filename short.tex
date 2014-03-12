@@ -63,7 +63,7 @@ Faced with a low-resource language pair, this paper provides the following contr
 	\small
 	\centering
 	\input{Tables/datasettings.tex}
-	\caption{Comparison of our data settings (last four rows) with previous work. Haitian Kreyol data are short messages sent after earthquake. Malagasy data is automatically aligned news articles in Malagasy). For these two languages we use the Bible as our source pivot bitext for both as they have no parallel data source with French, our pivot language. Mawukakan and Mawukakan have a very small source pivot and source target bi-texts, but the source pivot corpus has common sentences with the source target corpus. We use French as the pivot language to keep the same experimental setting for all our source languages.}
+	\caption{Comparison of our data settings (last four rows) with previous work. Haitian Kreyol data are short messages sent after earthquake. Malagasy data is automatically aligned news articles in Malagasy). For these two languages we use the Bible as our source pivot bitext as they have no parallel data source with French, our pivot language. Mawukakan and Mawukakan have a very small source pivot and source target bi-texts, but the source pivot corpus has common sentences with the source target corpus. We use French as the pivot language to keep the same experimental setting for all our source languages.}
 	\label{table:datasettings_differences}
 \end{table*}
 
@@ -88,9 +88,9 @@ Faced with a low-resource language pair, this paper provides the following contr
 	\end{eqnarray}
 	We are marginalizing over the pivot phrases (p), essentially making an independence assumption of the following form, as in~\cite{Cohn:07}:  
 	\begin{eqnarray*}
-		p(t \mid s)&=&\sum_{p}{p(t, p \mid s)}\\
-		&=& \sum_{p}{p(t \mid p, s)\,p(p \mid s)}\\
-		&\approx& \sum_{p}{p(t \mid p)\,p(p \mid s)}
+		p_w(t \mid s)&=&\sum_{p}{p_w(t, p \mid s)}\\
+		&=& \sum_{p}{p_w(t \mid p, s)\,p_w(p \mid s)}\\
+		&\approx& \sum_{p}{p_w(t \mid p)\,p_w(p \mid s)}
 	\end{eqnarray*}
 
 \noindent{\bf Joint probability for triangulation scores:}
@@ -120,7 +120,7 @@ Faced with a low-resource language pair, this paper provides the following contr
 %		\end{equation}
 %
 %	Why use the Model 1 score? 
-Model 1 learns the likelihood of the alignment of the individual words, while also considering the fact that a triangulated table will have less number of source phrases translating into good and some noisy translations. Noisy translations will automatically get a lower Model 1 score, something less likely to happen when using the simpler approach of multiplying the lexical scores. This effect of noisy translations ending up as a viable translation during decoding is also because of the limited source pivot training corpora available. Several translations have been only seen once and the phrase lengths are not very long either (90\% of Mawu or Manin phrase table has $\leq 3$ words).
+Model 1 learns the likelihood of the alignment of the individual words, while also considering the fact that a triangulated table will have less number of source phrases translating into good and some noisy translations. Noisy translations will automatically get a lower Model 1 score, something less likely to happen when using the simpler approach of multiplying the lexical scores. This effect of noisy translations ending up as a viable translation during decoding is also because of the limited source pivot training corpora available. Several translations have been only seen once and the phrase lengths are not very long either (85\% of Mawu or Manin phrase table has $\leq 3$ words).
 	\begin{comment}
 	The connectivity features in section~\ref{sec:strength} assign a phrase-level score to a given translation pair. The score does not reflect the actual alignments between the word pairs.  A Model 1 score is also used in~\cite{Cohn:07} in the absence of word alignments. They report a BLEU score improvement of 2 points over the standard feature set when using the Model 1 score, but we observe a different pattern altogether across all the four resource-poor languages~\ref{sec:results}. 
 	\end{comment}
@@ -277,7 +277,7 @@ Table~\ref{table:allrules} shows the increase in the phrase table size if we con
 \section{Experiments}
 \label{sec:experiments}
 
-\noindent{\bf Datasets:} Table~\ref{table:ddtt} contains the details about the data sets using for our four language pairs. Data for Mawukakan and Maninkakan has been released by LDC. For Malagasy, the training and development sets have been used as-is\footnote{http://www.ark.cs.cmu.edu/global-voices/}. As there is no separate heldout data, the top 500 sentences of the test set is used as heldout. All experiments in Haitian Kreyol use the same training, development, heldout and test sets as the WMT 2011 shared task. The training corpus for Haitian Kreyol comprises only 16\% in-domain data, while the development, heldout and test sets comprise only real-world short messages. The development, heldout and test sets for Haitian Kreyol have \emph{raw} and \emph{clean} versions. The pivot language used in all our experiments is French because we can only use French for Mawukakan and Maninkakan. We experimented with additional pivot languages for Haitian Kreyol but they did not help. The pivot-target data set is the 2.2M sentence pair French-English EuroParl corpus.
+\noindent{\bf Datasets:} Table~\ref{table:ddtt} contains the details about the data sets for the four language pairs. Data for Mawukakan and Maninkakan has been released by LDC. For Malagasy, the training and development sets have been used as-is\footnote{http://www.ark.cs.cmu.edu/global-voices/}. As there is no separate heldout data, the top 500 sentences of the test set is used as heldout. All experiments in Haitian Kreyol use the same training, development, heldout and test sets as the WMT 2011 shared task. The training corpus for Haitian Kreyol comprises only 16\% in-domain data, while the development, heldout and test sets comprise only real-world short messages. The development, heldout and test sets for Haitian Kreyol have \emph{raw} and \emph{clean} versions. The pivot language used in all our experiments is French because we can only use French for Mawukakan and Maninkakan. We experimented with additional pivot languages for Haitian Kreyol but they did not help. The pivot-target data set is the 1.9M sentence pair French-English EuroParl (v7) corpus.
 %The raw versions are the short messages sent as-is, while the clean versions are the same messages with some words corrected or removed, e.g caf* in raw is cafe in clean version. 
 	\begin{table}
 		\small
@@ -305,7 +305,7 @@ Table~\ref{table:allrules} shows the increase in the phrase table size if we con
 \end{comment}
 
 \subsection{Setup}
-	All the experiments have been run using the Moses toolkit~\cite{Koehn:07}, following the standard pipeline. After tokenizing and lowercasing and removing any empty lines, the alignments in both directions are generated using GIZA++~\cite{OchNey:03}, followed by the --grow-diag-final-and heuristic to extract phrases. Weights for the features in the log-linear model are learnt by maximizing the BLEU score~\cite{Papineni:02} on a heldout set using MERT~\cite{Och:03}. All BLEU scores reported are case-insensitive. SRILM~\cite{Stolcke:02} was used to generate the language models. For Haitian Kreyol, an interpolated 5-gram language model, using the english side of WMT data and the english side of Europarl, is used. For the other three languages, the language model used is 5-gram Gigaword. We use KenLM~\cite{Ken:11} for LM scoring during decoding. 
+	All the experiments have been run using the Moses toolkit~\cite{Koehn:07}, following the standard pipeline. After tokenizing and lowercasing and removing any empty lines, the alignments in both directions are generated using GIZA++~\cite{OchNey:03}, followed by the --grow-diag-final-and heuristic to extract phrases. Weights for the features in the log-linear model are learnt by maximizing the BLEU score~\cite{Papineni:02} on a heldout set using MERT~\cite{Och:03}. All BLEU scores reported are case-insensitive. SRILM~\cite{Stolcke:02} was used to generate the language models. For Haitian Kreyol, an interpolated 5-gram language model, using the English side of WMT data and the English side of Europarl, is used. For the other three languages, the language model used is 5-gram Gigaword. We use KenLM~\cite{Ken:11} for LM scoring during decoding. 
 
 		
 	\begin{table*}[t]
@@ -329,7 +329,7 @@ Table~\ref{table:allrules} shows the increase in the phrase table size if we con
 \subsection{Results}
 \label{sec:results}
 	
-	The BLEU scores for all languages are in Table~\ref{sec:results}. All the BLEU scores are reported on the held-out data (devtest-clean for Haitian Kreyol). For Haitian Kreyol, our BLEU score is +0.6 BLEU points higher than the best system from the 2011 Workshop on Haitian Kreyol. Another baseline is Uniform, using uniform weights for both baseline and triangulated translation models.  
+	The BLEU scores for all languages are in Table~\ref{table:all_results}. All the BLEU scores are reported on the held-out data (devtest-clean for Haitian Kreyol). For Haitian Kreyol, our BLEU score is +0.6 BLEU points higher than the best system from the 2011 Workshop on Haitian Kreyol. Another baseline is Uniform, using uniform weights for both baseline and triangulated translation models.  
 	In our experiments, we found that using a fan-out limit of 100 (considering top 100 translations for any source phrase) was optimal. 
 	Despite using a disjoint and out-of-domain Bible as source pivot, both Haitian Kreyol and Malagasy lead to a better BLEU score compared to both our baselines. 
 	For both Mawukakan and Maninkakan, the BLEU scores show a more significant increase of 2.2 and 1.5 BLEU points respectively for the interpolation model (significance tests are shown in Table~\ref{table:significance}). 
@@ -346,7 +346,7 @@ Unsupervised alignments on the triangulated phrase table (using IBM Model 1) hel
 		\end{table}
 
 \section{Conclusion}
-In this paper, we compared previously proposed models, features and design choices in triangulation for real world low-resource languages. We show that in a noisy domain adaptation setting which we faced in Haitian Kreyol and Malagasy due to the Bible as a source-pivot corpus, the use of unsupervised alignments to compute the phrase table feature scores led to a significantly higher BLEU score. We showed that the joint probability estimate proposed in~\cite{Cohn:07} leads to a better system for very low-resouce languages such as Mawukakan and Maninkakan. We showed that limiting the fan-out when building the triangulation table helps to cut down on useless triangulated phrase pairs. For interpolating the direct source-target system with the source-pivot-target system, we introduced an algorithm to automatically learn the mixture weights. Our algorithm provides significantly better results across different low-resource language pairs.
+In this paper, we compared previously proposed models, features and design choices in triangulation for real world low-resource languages. We show that in a noisy domain adaptation setting which we faced in Haitian Kreyol and Malagasy due to the Bible as a source-pivot corpus, the use of unsupervised alignments to compute the phrase table feature scores led to a significantly higher BLEU score. We showed that the joint probability estimate proposed in~\cite{Cohn:07} leads to a better system for very low-resource languages such as Mawukakan and Maninkakan. We showed that limiting the fan-out when building the triangulation table helps to cut down on useless triangulated phrase pairs. For interpolating the direct source-target system with the source-pivot-target system, we introduced an algorithm to automatically learn the mixture weights. Our algorithm provides significantly better results across different low-resource language pairs.
 
 \bibliographystyle{acl2014}
 \bibliography{short}
