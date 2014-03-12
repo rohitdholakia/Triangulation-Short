@@ -74,11 +74,7 @@ The two main contributions of this paper are that we answer the questions raised
 	All the papers that use triangulation cite either~\cite{Utiyama:07} or~\cite{Cohn:07}, both published in 2007 (and sometimes cite both of them but use either one model or the other). Subsequent work~\cite{Nakov:12,Nakovemnlp:12,Gispert:06,Huck:12} has also assumed that parallel data in pivot languages can be found in the same domain as the original resource-poor language pair. While~\cite{Utiyama:07} use multi-parallel Europarl comprising 560,000 sentences,~\cite{Cohn:07} use 700,000 Europarl sentences and a low-resource scenario is ``simulated'' by using the top 10K sentences for each language.~\cite{Nakov:12} propose a language-independent approach to improving translation for low-resource languages, but the approach assumes the presence of a resource-rich language that bears similarity to the low-resource language, the similarities helping in creating a large triangulated phrase table. In~\cite{Nakovemnlp:12}, the resource-rich language is adapted to be more like the resource-poor one. Notice that this also assumes both are very similar. Results are reported using both Malay-Indonesian and Bulgarian-Macedonian, the third language being English in both cases.~\cite{Gispert:06} translate Catalan to Spanish via English by using news corpora on both source pivot and pivot target side.~\cite{Huck:12} report on BLEU score improvements by using $10^9$ parallel sentence between German and French. This kind of domain similarity is not easy to find for realistic low-resource settings. We know from previous work that product of feature values can be used to compute feature values for the triangulated system. Using interpolation, we can improve over the direct system. But, facing a low-resource language, one is not so sure of which approach to use. 
 
 \subsection{Four Very Low-Resource Languages}
-	Data settings for~\cite{Utiyama:07} and ~\cite{Cohn:07} are shown in Table~\ref{table:datasettings_differences}. For all the four languages we study, the source pivot corpus is quite constrained (and disjoint in two cases). We chose Haitian Kreyol and Malagasy because the datasets represent real-world data (short messages sent after earthquake for Haitian Kreyol; automatically aligned news articles in Malagasy). Moreover, we use the Bible as our source pivot bitext for both as they have no parallel data source with French. This leads to a very disjoint set of systems, a contrast to Multi-parallel Europarl proceedings. On the other hand, Mawukakan and Mawukakan have a very tiny source pivot and source target bitext ($<$6K sentences each), but the source pivot corpus has common sentences with the source target corpus. The corpus sizes are mentioned in Table~\ref{table:datasettings_differences}. 
-
-
-
-
+	Data settings for~\cite{Utiyama:07} and ~\cite{Cohn:07} are shown in Table~\ref{table:datasettings_differences}. For all the four languages we study, the source pivot corpus is quite constrained (and disjoint in two cases). We chose Haitian Kreyol and Malagasy because the datasets represent real-world data (short messages sent after earthquake for Haitian Kreyol; automatically aligned news articles in Malagasy). Moreover, we use the Bible as our source pivot bitext for both as they have no parallel data source with French. This leads to a very disjoint set of systems, a contrast to Multi-parallel Europarl proceedings. On the other hand, Mawukakan and Mawukakan have a very small source pivot and source target bi-texts ($<$6K sentences each), but the source pivot corpus has common sentences with the source target corpus. The corpus sizes are mentioned in Table~\ref{table:datasettings_differences}. 
 
 \begin{comment}
 \section{Four real-world low resource languages}
@@ -139,18 +135,17 @@ The two main contributions of this paper are that we answer the questions raised
 	The size of the triangulated phrase table is controlled by the number of translations \emph{n} considered for a given source phrase. Consider a source phrase \emph{p$_s$} that translates to \emph{p$_p$} in the pivot language. The phrase \emph{p$_p$} has 1293 translations in the pivot target table. Considering all the 1293 translations will result in 1293 translations for the phrase \emph{p$_s$} via one pivot phrase. It is reasonable to expect the phrase \emph{p$_s$} to have multiple pivot translations, all having a high number of translations in pivot target, as the fan-out is quite high. Considering all translations is not recommended for several reasons. Firstly, this will lead to a very large phrase table. Table~\ref{table:allrules} shows the number of rules we can end up with if we consider all possible paths to a target phrase. To put it in perspective, the direct table for Mawukakan and Maninkakan have 51K and 60K phrase pairs respectively. Secondly, alongwith valid translations, triangulation also adds some noise to the translations by considering several translations of the common pivot phrase. We observed that for Mawukakan and Maninkakan, taking the top 100 translations was the same as taking the top 1000 translations, in terms of the BLEU score. We also observed that using more than top 100 translations for Haitian Kreyol and Malagasy led to decline in quality of output translations. Thus, it is important to pay attention to the translation pairs we include in the triangulated phrase table. 
 
 	\begin{table}
-		\footnotesize
-		\small
+		{\footnotesize
 		\centering
-
 		\begin{tabular}{p{0.3\linewidth}p{0.3\linewidth}p{0.3\linewidth}}
-		\toprule
+		\hline
 		Language & Rules \\
-		\toprule
+		\hline
 		Maninkakan &  106.7M \\
 		Mawukakan &  151.6M \\
-		\bottomrule
+		\hline
 		\end{tabular}
+        }
 		\caption{Number of rules if all possible paths are considered}
 		\label{table:allrules}
 	\end{table}
@@ -278,60 +273,60 @@ The two main contributions of this paper are that we answer the questions raised
 
 	Algorithm~\ref{algo:condor} explains an iterative method that learns the best $\lambda_{d}$  using CONDOR~\cite{Condor:05}. Note that the approach can be easily extended to multiple triangulated models or different co-efficients for each feature. Line~\ref{aline:inter} interpolates the two translation models using equation~\eqref{eq:interpolation}. We re-tune the log-linear weights using MERT for the interpolated feature values (on the same tuning data as the baseline) and use the tuned model to find BLEU score on the same heldout set. Based on the difference between the BLEU score obtained and the previous BLEU (Line~\ref{aline:search}), CONDOR searches for the new co-efficient in the corresponding direction. The search will culminate when consecutive BLEU scores show a marginal difference (Line~\ref{aline:condition}). For instance, we start with a value of 0.85 for the direct system from Mawu to English. This gets a BLEU score of 9.10.  If we use uniform weights for both the tables, we get BLEU scores on heldout as shown in Table~\ref{table:all_results}. In three of four cases, we would not have out-performed our baseline. Alternatively, we can try 0.50, 0.60, 0.70 and 0.80~\cite{Nakov:12}, keeping in mind the different domains. Although 0.70 would have given us our best BLEU for this pair, we observed that different languages led to different interpolation weights (Table~\ref{table:condor_run}), and this was different for different design choices (Haitian Kreyol and Malagasy have disjoint systems). Essentially, our method is an iterative method that will systematically lead to the best possible BLEU score for the given models.  
 
-	\begin{table*}
-		\footnote
-		\tiny
+	\begin{table}
+        \centering
+		{\footnotesize
 		\begin{tabular}{lr}
-		\toprule
+		\hline
 		Language & Best $\lambda_{d}$ \\
-		\toprule
+		\hline
 		Mawukakan & 0.84 \\
 		Maninkakan & 0.75 \\
 		Haitian Kreyol & 0.95 \\
 		Malagasy & 0.82 \\
-		\bottomrule
+		\hline
 		\end{tabular}
-		\caption{Different languages have different interpolation co-efficients that lead to the best system. Although we always start with 0.85, we iterate systematically over different values to obtain the best co-efficient}
+        }
+		\caption{Different languages have different interpolation co-efficients that lead to the best system. Although we always start with 0.85, we iterate systematically over different values to obtain the best co-efficient.}
 		\label{table:condor_run}
-	\end{table*}
+	\end{table}
 
 	\begin{comment}
 	\begin{table*}
-	\footnote
-	\tiny
+    {\footnotesize
 	\begin{tabular}{l||rrr}
-		\toprule
+		\hline
 			Iteration & $\lambda_{d}$ & BLEU & Significant?\\
-			\toprule
+			\hline
 			0 & 0.85 & 9.1 &  No \\
 			1 & 0.72 & 8.90 & Yes \\
 			4 & 0.8 & 8.93 & Yes \\
 			5 & 0.7 & \textbf{9.69} & -\\
 			6 & 0.9 & 8.47 & Yes \\
 			7 & 0.69 & 8.82 & Yes \\
-		\bottomrule
+		\hline
 	\end{tabular}
+    }
 	\caption{BLEU scores with various $\lambda_{d}$ values}
 	\label{table:condor_run}
 	\end{table*}
 	\end{comment}
 
-
 	\begin{comment}
 	\begin{table*}
-	\footnote
-	\tiny
+	{\footnotesize
 	\begin{tabular}{lr} 
-		\toprule
+		\hline
 		$\lambda_{d}$ & BLEU \\
-		\toprule
+		\hline
 		0.85 & 10.01 \\
 		0.95 & 10.21 \\
 		0.63 & 10.43 \\
 		0.53 & 10.41 \\
 		0.612 & 10.91 \\
-		\bottomrule
+		\hline
 	\end{tabular}
+    }
 	\caption{BLEU scores with various $\lambda_{d}$ values}
 	\end{table*} 
 	\end{comment}
@@ -340,10 +335,10 @@ The two main contributions of this paper are that we answer the questions raised
 	
 \begin{comment}
 	\begin{table}
-		\footnotesize
-		\small
+		{\footnotesize
 		\centering
 		\input{Tables/half.tex}
+        }
 		\caption{BLEU scores on devtest if uniform values assumed for both}
 		\label{table:half}
 	\end{table}
@@ -427,6 +422,8 @@ The two main contributions of this paper are that we answer the questions raised
 
 
 	\begin{table*}
+    \centering
+    {\footnotesize
 	\begin{tabular}{|l|l|l|}
 		\toprule
 		\multicolumn{3}{|c|}{Examples} \\
@@ -440,6 +437,7 @@ The two main contributions of this paper are that we answer the questions raised
 		\multirow{3}{*}{Haitian Kreyol} & Before & \emph{do we still have earth-shock for haiti ?} \\ & After & are there always earthquake in haiti ? \\ & Reference &  are there any more earthquakes in haiti ?\\
 		\bottomrule
 	\end{tabular}
+    }
 	\caption{Examples of improvements in translations. While we reduce OOVs in the first example, in the second and third, we obtain better translations after interpolation}	
 	\label{table:example_translations}
 	\end{table*}
