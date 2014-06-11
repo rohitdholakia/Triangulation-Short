@@ -99,11 +99,39 @@ This paper provides the following contributions which are useful when building a
 
 \noindent{\bf Joint probability for triangulation scores:}
 \label{sec:joint}
-	\cite{Cohn:07} propose using the joint probability $p_{w}(s, t)$ to calculate the triangulated phrase scores $p_{w}(t \mid s)$ and $p_{w}(s \mid t)$. Since we do not have observed counts in the triangulated phrase table, counting the pairs after triangulation will not be a true reflection of the joint probability. Instead, for a triangulated table between \emph{s} and \emph{t}, using source-pivot phrase table \emph{sp} and pivot-target phrase table \emph{pt}, the joint probability of a phrase pair $(s, t)$ is computed as: 
+	\cite{Cohn:07} propose using the joint probability $p_{w}(s, t)$ to calculate the triangulated phrase scores $p_{w}(t \mid s)$ and $p_{w}(s \mid t)$. Since we do not have observed counts in the triangulated phrase table, counting the pairs after triangulation will not be a true reflection of the joint probability. % Instead, for a triangulated table between \emph{s} and \emph{t}, using source-pivot phrase table \emph{sp} and pivot-target phrase table \emph{pt}, the joint probability of a phrase pair $(s, t)$ is computed as: 
+
+	The joint probability of a phrase pair looks as shown in Equation~\ref{eqn:joint}, which decomposes to Equation~\ref{eqn:joint_dec}. Making an independence assumption, shown in Equation~\ref{eqn:approximation}, we compute the joint probability of a triangulated phrase pair as shown in Equation~\ref{eqn:joint_final}. 
+
+	
+	\begin{equation} \label{eqn:joint}
+		P(s, t) = \sum_{p} P(s, p, t)
+	\end{equation}
+
+	\begin{equation} \label{eqn:joint_dec}
+		P(s, p, t) = \sum_{p}P(p, t) P(s \mid p, t)
+	\end{equation}
+
+
+	
+	\begin{equation} \label{eqn:approximation}
+		P(s \mid p, t) \approx P(s \mid p)
+	\end{equation}
+
+
+
+	\begin{equation} \label{eqn:joint_final}
+		p_{tr}(s, t) = \sum_{p} p_{pt}(t) p_{pt}(p \mid t) p_{sp} (s \mid p)
+	\end{equation}
+
+
+	\begin{comment}
 	\begin{eqnarray*}
 		p_{tr}(s, t) &=& \sum_{p}p_{sp}(s, p) p_{pt}(p, t) \\
 				&=& \sum_{p}p_{sp}(s \mid p) p_{sp}(p) p_{pt}(p \mid t) p_{pt}(t)
 	\end{eqnarray*} 
+	\end{comment}
+
 	The counts for the direct system are used to compute the joint and the conditional distributions in this equation.
 	
 \subsection{Lexical Scores}
