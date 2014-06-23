@@ -36,7 +36,7 @@
 \newcommand{\alert}[1]{{\textcolor{blue}{ALRT: #1}}}
 
 \setlength\titlebox{1.2cm}    % You can expand the title box if you
-\title{Something to avoid bad reviewers}
+\title{Pivot-based Triangulation for Low-Resource Languages}
 \author{}
 
 \date{}
@@ -44,7 +44,6 @@
 \maketitle
 
 \begin{abstract}
-\alert{Tough}
 This paper conducts the first comprehensive study on the use of triangulation for four very low-resource languages: Mawukakan and Maninkakan, Haitian Kreyol and Malagasy. We build the first effective system for the first two of these languages and outperform the state-of-the-art for Haitian Kreyol. We improve translation quality by adding data using pivot languages and experimentally compare previously proposed triangulation design options. Furthermore, since the low-resource language pair and pivot language pair data typically come from very different domains, we use insights from domain adaptation to tune the weighted mixture of direct and pivot based phrase pairs to improve translation quality.
 \end{abstract}
 
@@ -56,7 +55,6 @@ Faced with a low-resource language pair, several questions arise when trying to 
 
 \begin{itemize}\addtolength{\itemsep}{-0.4\baselineskip}
 	\item \cite{Utiyama:07} use a different way of computing lexical scores from \cite{Cohn:07}. Which one is better suited for a resource-poor scenario?
-  \item \cite{Bertoldi:08} observed that using alternative decoding paths helped the BLEU score. Is this the case for low-resource languages?
 	\item In \cite{Utiyama:07,Cohn:07,Nakovemnlp:12,Wuwang:07} many different feature functions are provided for the log-linear model over triangulated phrase pairs. We conduct extensive experiments to show which features should be used for real world low-resource languages based on the data settings for each language pair.
 	\item In \cite{Cohn:07} a mixture of the direct system and the triangulated system is shown to work better. However, they used uniform weights. In \cite{Nakovemnlp:12} a few different weights were selected heuristically while in \cite{Wuwang:07}, 0.9 is assumed for the baseline. We provide an algorithm that combines grid search for learning the mixture weights and minimum error rate training of the direct and triangulated log-linear models. 
 	%This method finds the best interpolation co-efficient for each language pair.
@@ -369,11 +367,9 @@ Table~\ref{table:allrules} shows the increase in the phrase table size if we con
 		\toprule
 		Language & Category & Example translation \\
 		\toprule
-		\multirow{3}{*}{Mawukakan} & Before & \emph{her father y$\acute{a}$ng$\grave{a}$l$\acute{o}$$\grave{o}$ has l$\acute{a}$kw$\grave{e}$ everything} \\ & After & the disease her father is not in a position to everything \\ &  Reference & the illness has rendered her father invalid \\
-		\midrule
-		\multirow{3}{*}{Mawukakan} & Before & \emph{the entrance of the child behind her back and let us go home} \\ & After & the child behind her back and let us go home \\ & Reference & take the baby in your back and let 's go home \\ 
-		\midrule
 		\multirow{3}{*}{Haitian Kreyol} & Before & \emph{do we still have earth-shock for haiti ?} \\ & After & are there always earthquake in haiti ? \\ & Reference &  are there any more earthquakes in haiti ?\\
+		\midrule
+		\multirow{3}{*}{Maninkakan} & Before & \emph{we will go there t$\acute{\varepsilon}$n$\acute{\varepsilon}$nl$\acute{o}$n} \\ & After & we will go there on monday .\\ & Reference & we will go there on monday . \\
 		\bottomrule
 	\end{tabular}
     }
