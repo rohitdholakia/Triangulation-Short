@@ -100,7 +100,7 @@ A common thread that binds the previous work using the approach of triangulation
 \label{sec:phrase_scores}
 
 %\subsubsection{Product Approach}
-\textbf{Product Approach:} \cite{Utiyama:07} computes feature values for the triangulation phrases by multiplying values from source-pivot and pivot-target phrase tables:
+\subsubsection{Product Approach} \cite{Utiyama:07} computes feature values for the triangulation phrases by multiplying values from source-pivot and pivot-target phrase tables:
 	\begin{eqnarray} 
 	    \label{eq:forward}
         p_w(t \mid s) &=& \sum_{p} p_w(t \mid p) p_w(p \mid s) \\
@@ -114,7 +114,7 @@ A common thread that binds the previous work using the approach of triangulation
 		&\approx& \sum_{p}{p_w(t \mid p)\,p_w(p \mid s)}
 	\end{eqnarray*}
 
-\textbf{Joint probability for triangulation scores:}
+\subsubsection{Joint probability for triangulation scores}
 \label{sec:joint}
 	\cite{Cohn:07} propose using the joint probability $p_{w}(s, t)$ to calculate the triangulated phrase scores $p_{w}(t \mid s)$ and $p_{w}(s \mid t)$. Since we do not have observed counts in the triangulated phrase table, counting the pairs after triangulation will not be a true reflection of the joint probability. % Instead, for a triangulated table between \emph{s} and \emph{t}, using source-pivot phrase table \emph{sp} and pivot-target phrase table \emph{pt}, the joint probability of a phrase pair $(s, t)$ is computed as: 
 
@@ -154,14 +154,14 @@ A common thread that binds the previous work using the approach of triangulation
 \subsection{Lexical Scores}
 \label{sec:lexical_scores}
 %\subsection{Product Approach}
-\textbf{Product Approach:}	Similar to phrase scores, we compute the triangulated lexical scores using the product of the lexical scores of the source-pivot and pivot-target tables.   
+\subsubsection{Product Approach}	Similar to phrase scores, we compute the triangulated lexical scores using the product of the lexical scores of the source-pivot and pivot-target tables.   
 	\begin{eqnarray}
         p_{\mathrm{lex}}(t \mid s) &=& \sum_{p} p_{\mathrm{lex}}(t \mid p) p_{\mathrm{lex}}(p \mid s) \\
         p_{\mathrm{lex}}(s \mid t) &=& \sum_{p} p_{\mathrm{lex}}(s \mid p) p_{\mathrm{lex}}(p \mid t)
 	\end{eqnarray}
 
 %\subsection{IBM Model 1 Alignments}
-\textbf{IBM Model 1 Alignments:} \label{sec:model1} \cite{Cohn:07} propose an alternative way to compute the lexical score by using unsupervised alignments between source and target phrases in the triangulated phrase table. They use the IBM Model 1~\cite{Brown:1993} (Model 1, henceforth) score between the phrase pairs in the triangulated table. Treating the triangulated phrase table as a parallel corpus, we learn the Model 1 alignment scores in both directions using 5 iterations of the EM algorithm~\cite{Dempster:77}. 
+\subsubsection{IBM Model 1 Alignments} \label{sec:model1} \cite{Cohn:07} propose an alternative way to compute the lexical score by using unsupervised alignments between source and target phrases in the triangulated phrase table. They use the IBM Model 1~\cite{Brown:1993} (Model 1, henceforth) score between the phrase pairs in the triangulated table. Treating the triangulated phrase table as a parallel corpus, we learn the Model 1 alignment scores in both directions using 5 iterations of the EM algorithm~\cite{Dempster:77}. 
 %Given a foreign sentence f = f$_{1}$, . . . ., f$_{m}$, english sentence e = e$_{1}$, . . . , e$_{l}$, the %Model 1 score between the sentences is calculated as follows: 
 %
 %		\begin{equation}
@@ -176,7 +176,7 @@ Model 1 learns the likelihood of the alignment of the individual words, while al
 
 
 %\subsection{Connectivity Features}
-\textbf{Connectivity Features:} \label{sec:strength} The phrase pairs in the triangulated phrase table are contingent upon the common pivot phrases. As a result, we can have phrase pairs that map \textbf{``!''} to a target phrase \textbf{``and making the soup thick !''} in Haitian Kreyol to English triangulated phrase table. Due to the fan-out nature of triangulation, spurious phrase pairs like above get high enough feature values to end up as a translation during decoding. To reward phrase pairs that have more alignment links between and to penalize pairs that don't, we add two connectivity features to the phrase table, as proposed in~\cite{Ahmed:13} for Persian to Arabic translation using English as the pivot language. For a source phrase \emph{p$_s$}, target phrase \emph{p$_t$}, and with the number of alignment links between them \emph{N}, the strength feature is:
+\subsection{Connectivity Features:} \label{sec:strength} The phrase pairs in the triangulated phrase table are contingent upon the common pivot phrases. As a result, we can have phrase pairs that map \textbf{``!''} to a target phrase \textbf{``and making the soup thick !''} in Haitian Kreyol to English triangulated phrase table. Due to the fan-out nature of triangulation, spurious phrase pairs like above get high enough feature values to end up as a translation during decoding. To reward phrase pairs that have more alignment links between and to penalize pairs that don't, we add two connectivity features to the phrase table, as proposed in~\cite{Ahmed:13} for Persian to Arabic translation using English as the pivot language. For a source phrase \emph{p$_s$}, target phrase \emph{p$_t$}, and with the number of alignment links between them \emph{N}, the strength feature is:
 	\begin{eqnarray*}
 		source_{strength} &=& \frac{\mathrm{N}}{\mathrm{S}} \\
 		target_{strength} &=& \frac{\mathrm{N}}{\mathrm{T}}
