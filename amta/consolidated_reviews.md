@@ -82,7 +82,7 @@ of the equation.
 
 In the beginning of 3.4, should be $p_{tr}$ instead of $p_tr$.
 
---**fixed**
+--*fixed*
 
 It would be nice to include the significance testing results in Table 4 itself.
 This would
@@ -94,7 +94,7 @@ The authors state that they obtained a BLEU score of 9.10 for Mawu-English --
 is this
 the BLEU score on the data used for tuning?
 
---**We already said all results reported are using heldout**
+--*We already said all results reported are using heldout*
 
 In Table 5, presumably that's the number of segments? Can you also include
 token counts?
