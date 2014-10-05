@@ -1,6 +1,8 @@
 all:
-	latex short.tex
-	bibtex short
-	latex short.tex
-	pdflatex short.tex
-	rm *.aux *.bbl *.blg *.dvi
+	pdflatex triangulation-amta2014
+	bibtex triangulation-amta2014
+	pdflatex triangulation-amta2014
+	pdflatex triangulation-amta2014
+
+clean:
+	/bin/rm -f *.aux *.bbl *.blg *.dvi *.log

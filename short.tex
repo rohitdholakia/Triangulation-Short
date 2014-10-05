@@ -332,7 +332,7 @@ Table~\ref{table:allrules} shows the increase in the phrase table size if we con
 	The BLEU scores for all languages are in Table~\ref{table:all_results}. All the BLEU scores are reported on the held-out data (devtest-clean for Haitian Kreyol). For Haitian Kreyol, our BLEU score is +0.6 BLEU points higher than the best system from the 2011 Workshop on Haitian Kreyol. Another baseline is Uniform, using uniform weights for both baseline and triangulated translation models.  
 	In our experiments, we found that using a fan-out limit of 100 (considering top 100 translations for any source phrase) was optimal. 
 	Despite using a disjoint and out-of-domain Bible as source pivot, both Haitian Kreyol and Malagasy lead to a better BLEU score compared to both our baselines. 
-	For both Mawukakan and Maninkakan, the BLEU scores show a more significant increase of 2.2 and 1.5 BLEU points respectively for the interpolation model (significance tests are shown in Table~\ref{table:significance}). 
+	For both Mawukakan and Maninkakan, the BLEU scores show a more significant increase of 2.2 and 1.5 BLEU points respectively for the interpolation model are shown in Table~\ref{table:significance}). 
 %	As the training and source pivot corpora for both comprise commonly spoken sentences that are not very long, the English side of Europarl effectively augments the limited target side of the training corpus, thus, leading to better translations after interpolation. 
 	%Intuitively, the two connectivity features should penalize the spurious and less aligned phrases, thus, reducing the noise and rewarding the just translations. But, the effect is not observed in the BLEU scores. 
 	Except in the case of Haitian Kreyol where it improves by a small margin, adding the two connectivity features reduces the BLEU score. This is likely due to source-pivot having a small intersection with cleaner Europarl alignments. In Mawukakan and Maninkakan, 60\% and 66\% phrase pairs have a source connectivity strength of more than 0.5 while 67\% and 69\% have more than 0.5 in the backward direction.
@@ -341,7 +341,7 @@ Unsupervised alignments on the triangulated phrase table (using IBM Model 1) hel
 			{\footnotesize
 			\input{Tables/Significance.tex}
 			}
-			\caption{Significance tests for our results. All use the same tuning and heldout set.}
+			\caption{Significance tests for our results. All use the same tuning and heldout set. (We used multeval~\cite{Clark:11} for the significance tests)}
 			\label{table:significance}
 		\end{table}
 
